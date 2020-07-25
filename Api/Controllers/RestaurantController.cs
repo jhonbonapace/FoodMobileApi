@@ -1,10 +1,10 @@
-using System.Collections.Generic;
-using System.IO;
 using Application.Attributes;
 using Application.DTO;
 using Application.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 
 namespace Api.Controllers
 {
@@ -13,27 +13,51 @@ namespace Api.Controllers
     public class RestaurantController : ControllerBase
     {
         private readonly RestaurantService _restaurantService;
+        private readonly ILogger<RestaurantController> _logger;
 
-        public RestaurantController(RestaurantService restaurantService) => _restaurantService = restaurantService;
+        public RestaurantController(ILogger<RestaurantController> logger, RestaurantService restaurantService)
+        {
+            _logger = logger;
+            _restaurantService = restaurantService;
+        }
 
         [HttpPost]
         [Authorize]
-        [Route("Add")]  
+        [Route("Add")]
         public IActionResult Add([FromForm] RestaurantDTO restaurantDto)
         {
-            _restaurantService.Add(restaurantDto);
+            try
+            {
+                _restaurantService.Add(restaurantDto);
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError(ex, ex.Message);
+
+                return StatusCode(500);
+            }
         }
 
         [HttpGet]
         [Authorize]
-        [Route("List")]     
+        [Route("List")]
         public IActionResult List([FromQuery] RestaurantListFilterDTO restaurantListFilterDto)
         {
-            IEnumerable<RestaurantListResultDTO> result = _restaurantService.List(restaurantListFilterDto);
+            try
+            {
+                IEnumerable<RestaurantListResultDTO> result = _restaurantService.List(restaurantListFilterDto);
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+
+                return StatusCode(500);
+            }           
         }
     }
 }
