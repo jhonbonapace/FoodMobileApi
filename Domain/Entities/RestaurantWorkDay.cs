@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System;
-namespace Domain
+
+namespace Domain.Entities
+
 {
-    public class RestaurantWorkDay
+    public class RestaurantWorkDay : Base
     {
-        public int Id { get; set; }
+
         public int IdRestaurant { get; set; }
         public DayOfWeek WeekDay { get; set; }
         public TimeSpan TimeOpen { get; set; }

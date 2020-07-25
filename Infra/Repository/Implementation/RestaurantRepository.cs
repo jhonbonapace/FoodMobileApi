@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Domain;
+using Domain.Entities;
 using Infra.Repository.Interface;
 using MongoDB.Driver;
 using MongoDB.Driver.GeoJsonObjectModel;

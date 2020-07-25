@@ -2,7 +2,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using Application.DTO;
-using Domain;
+using Domain.Entities;
 using Infra.Repository.Interface;
 
 namespace Application.Services
@@ -26,7 +26,7 @@ namespace Application.Services
             }
 
             _restaurantRepository.Create(
-                new Domain.Restaurant(
+                new Restaurant(
                     restaurantDto.Name, 
                     thumbnail, 
                     restaurantDto.Latitude, 

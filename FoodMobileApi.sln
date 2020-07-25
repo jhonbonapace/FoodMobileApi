@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{1D6F5289-2D3C-4E54-9549-750B1476F808}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{1D6F5289-2D3C-4E54-9549-750B1476F808}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{9923BB6F-6E71-4CEE-ABC0-89C7EDADF0C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{9923BB6F-6E71-4CEE-ABC0-89C7EDADF0C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{077E9F08-A325-4410-9715-859F8A0B5F3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{077E9F08-A325-4410-9715-859F8A0B5F3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra", "Infra\Infra.csproj", "{98330282-C70A-41DF-84FE-DA2BC89CB4B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra", "Infra\Infra.csproj", "{98330282-C70A-41DF-84FE-DA2BC89CB4B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossCutting", "CrossCutting\CrossCutting.csproj", "{D86CEB2D-B01B-47F8-8A26-1A870C22AB8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,9 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1D6F5289-2D3C-4E54-9549-750B1476F808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -72,5 +71,23 @@ Global
 		{98330282-C70A-41DF-84FE-DA2BC89CB4B1}.Release|x64.Build.0 = Release|Any CPU
 		{98330282-C70A-41DF-84FE-DA2BC89CB4B1}.Release|x86.ActiveCfg = Release|Any CPU
 		{98330282-C70A-41DF-84FE-DA2BC89CB4B1}.Release|x86.Build.0 = Release|Any CPU
+		{D86CEB2D-B01B-47F8-8A26-1A870C22AB8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D86CEB2D-B01B-47F8-8A26-1A870C22AB8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D86CEB2D-B01B-47F8-8A26-1A870C22AB8C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D86CEB2D-B01B-47F8-8A26-1A870C22AB8C}.Debug|x64.Build.0 = Debug|Any CPU
+		{D86CEB2D-B01B-47F8-8A26-1A870C22AB8C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D86CEB2D-B01B-47F8-8A26-1A870C22AB8C}.Debug|x86.Build.0 = Debug|Any CPU
+		{D86CEB2D-B01B-47F8-8A26-1A870C22AB8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D86CEB2D-B01B-47F8-8A26-1A870C22AB8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D86CEB2D-B01B-47F8-8A26-1A870C22AB8C}.Release|x64.ActiveCfg = Release|Any CPU
+		{D86CEB2D-B01B-47F8-8A26-1A870C22AB8C}.Release|x64.Build.0 = Release|Any CPU
+		{D86CEB2D-B01B-47F8-8A26-1A870C22AB8C}.Release|x86.ActiveCfg = Release|Any CPU
+		{D86CEB2D-B01B-47F8-8A26-1A870C22AB8C}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F269D1E6-68CD-4B8D-A597-9739B52E0CE9}
 	EndGlobalSection
 EndGlobal

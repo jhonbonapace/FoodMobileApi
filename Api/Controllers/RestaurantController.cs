@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using Application.Attributes;
 using Application.DTO;
 using Application.Services;
 using Microsoft.AspNetCore.Http;
@@ -16,7 +17,8 @@ namespace Api.Controllers
         public RestaurantController(RestaurantService restaurantService) => _restaurantService = restaurantService;
 
         [HttpPost]
-        [Route("Add")]
+        [Authorize]
+        [Route("Add")]  
         public IActionResult Add([FromForm] RestaurantDTO restaurantDto)
         {
             _restaurantService.Add(restaurantDto);
@@ -25,7 +27,8 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        [Route("List")]
+        [Authorize]
+        [Route("List")]     
         public IActionResult List([FromQuery] RestaurantListFilterDTO restaurantListFilterDto)
         {
             IEnumerable<RestaurantListResultDTO> result = _restaurantService.List(restaurantListFilterDto);
