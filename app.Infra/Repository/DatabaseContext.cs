@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Entities.Location;
 using Domain.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -15,6 +16,9 @@ namespace Infra.Repository
             _databaseSettings = databaseSettings.Value;
         }
         public DbSet<User> User { get; set; }
+        public DbSet<Country> Country { get; set; }
+        public DbSet<State> State { get; set; }
+        public DbSet<City> City { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
