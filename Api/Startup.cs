@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace Api
 {
@@ -22,15 +23,22 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DatabaseContext>(context => context.UseMySQL(Configuration.GetConnectionString("SqlDatabase")));
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
+            services.Configure<DatabaseSettings>(Configuration.GetSection("ConnectionStrings"));
+
+            services.AddDbContext<DatabaseContext>();
+         
             services.ConfigureDependencies();
 
             services.AddCors();
 
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(o =>
+            {
+                o.JsonSerializerOptions.PropertyNamingPolicy = null;
+                o.JsonSerializerOptions.DictionaryKeyPolicy = null;
+            });
    
         }
 
@@ -52,6 +60,10 @@ namespace Api
              .AllowAnyOrigin()
              .AllowAnyMethod()
              .AllowAnyHeader());
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

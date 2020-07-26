@@ -1,26 +1,100 @@
 ﻿using Application.Interface;
 using Domain.Entities;
+using Infra.Repository;
+using Infra.Repository.Implementation;
+using Infra.Repository.Interface;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Application.Services
 {
 
     public class UserService : IUserService
     {
-        private List<User> _users = new List<User>
-        {
-            new User { Id = 1, Name = "Test", Email = "luc-diogo@hotmail.com", Password = "123" }
-        };
+        private IUserRepository _userRepository;
 
-        public User Get(int id)
+        public UserService(DatabaseContext context)
         {
-            return _users.FirstOrDefault(x => x.Id == id);
+            _userRepository = new UserRepository(context);
         }
 
-        public User Get(string Username, string Password)
+        public User Get(int Id)
         {
-            return _users.FirstOrDefault(x => x.Email == Username && x.Password == Password);
+            try
+            {
+                return _userRepository.Get(Id);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public User Get(string Email, string Password)
+        {
+            try
+            {
+                return _userRepository.Get(Email, Password);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public IEnumerable<User> List()
+        {
+            try
+            {
+                return _userRepository.List();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public bool Incluir(User user)
+        {
+            try
+            {
+                return _userRepository.Incluir(user);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public bool Update(User user)
+        {
+            try
+            {
+                return _userRepository.Update(user);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public bool Excluir(int Id)
+        {
+            try
+            {
+                return _userRepository.Excluir(Id);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using Application.Interface;
 using Domain.Entities;
 using Domain.Helpers;
+using Infra.Repository;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -14,15 +15,17 @@ namespace Application.Services
     public class AuthService : IAuthService
     {
         private readonly AppSettings _appSettings;
+        private readonly DatabaseContext _context;
 
-        public AuthService(IOptions<AppSettings> appSettings)
+        public AuthService(IOptions<AppSettings> appSettings, DatabaseContext context)
         {
             _appSettings = appSettings.Value;
+            _context = context;
         }
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model)
         {
-            IUserService userService = new UserService();
+            IUserService userService = new UserService(_context);
 
             var user = userService.Get(model.Email, model.Password);
 
