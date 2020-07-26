@@ -24,7 +24,7 @@ namespace Application.Services
         {
             IUserService userService = new UserService();
 
-            var user = userService.Get(model.Username, model.Password);
+            var user = userService.Get(model.Email, model.Password);
 
             if (user == null) return null;
 

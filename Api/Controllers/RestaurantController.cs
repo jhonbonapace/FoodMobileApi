@@ -1,6 +1,7 @@
 using Application.Attributes;
 using Application.DTO;
 using Application.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -24,6 +25,8 @@ namespace Api.Controllers
         [HttpPost]
         [Authorize]
         [Route("Add")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult Add([FromForm] RestaurantDTO restaurantDto)
         {
             try
@@ -44,6 +47,8 @@ namespace Api.Controllers
         [HttpGet]
         [Authorize]
         [Route("List")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult List([FromQuery] RestaurantListFilterDTO restaurantListFilterDto)
         {
             try

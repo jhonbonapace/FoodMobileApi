@@ -10,7 +10,7 @@ namespace Application.Services
     {
         private List<User> _users = new List<User>
         {
-            new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" }
+            new User { Id = 1, Name = "Test", Email = "luc-diogo@hotmail.com", Password = "123" }
         };
 
         public User Get(int id)
@@ -20,7 +20,7 @@ namespace Application.Services
 
         public User Get(string Username, string Password)
         {
-            return _users.FirstOrDefault(x => x.Username == Username && x.Password == Password);
+            return _users.FirstOrDefault(x => x.Email == Username && x.Password == Password);
         }
     }
 }

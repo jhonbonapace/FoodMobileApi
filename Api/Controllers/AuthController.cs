@@ -1,6 +1,5 @@
 ﻿using Application.DTO.Auth;
 using Application.Interface;
-using Application.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

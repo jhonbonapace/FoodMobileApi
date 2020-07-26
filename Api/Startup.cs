@@ -1,7 +1,9 @@
 using Api.Middlewares;
 using Domain.Helpers;
+using Infra.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,13 +21,17 @@ namespace Api
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {     
-            services.ConfigureDependencies();
-            services.AddCors();
-            services.AddControllers();
+        {
+            services.AddDbContext<DatabaseContext>(context => context.UseMySQL(Configuration.GetConnectionString("SqlDatabase")));
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
+            services.ConfigureDependencies();
+
+            services.AddCors();
+
+            services.AddControllers();
+   
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,9 +52,6 @@ namespace Api
              .AllowAnyOrigin()
              .AllowAnyMethod()
              .AllowAnyHeader());
-
-        
-
 
             app.UseEndpoints(endpoints =>
             {

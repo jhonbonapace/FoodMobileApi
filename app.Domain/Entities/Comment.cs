@@ -1,7 +1,7 @@
 namespace Domain.Entities
 
 {
-    public class Comment
+    public class Comment : Base
     {
         
     }
