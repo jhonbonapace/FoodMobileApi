@@ -22,15 +22,15 @@ namespace Infra.Repository.Implementation
                 .OrderBy(p => p.Id).ToList();
         }
 
-        public IEnumerable<State> GetStates(int IdCountry)
+        public IEnumerable<State> GetStates(int CountryId)
         {
-            return _context.State.Where(e => e.IdCountry == IdCountry)
+            return _context.State.Where(e => e.CountryId == CountryId)
                 .OrderBy(p => p.Id).ToList();
         }
 
-        public IEnumerable<City> GetCities(int IdState)
+        public IEnumerable<City> GetCities(int StateId)
         {
-            return _context.City.Where(e => e.IdState == IdState)
+            return _context.City.Where(e => e.StateId == StateId)
                 .OrderBy(p => p.Id).ToList();
         }
     }

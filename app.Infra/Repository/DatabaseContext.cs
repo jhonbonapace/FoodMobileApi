@@ -3,7 +3,10 @@ using Domain.Entities.Location;
 using Domain.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Infra.Repository
 {
@@ -31,6 +34,40 @@ namespace Infra.Repository
             });
 
             base.OnConfiguring(optionsBuilder);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            #region CountrySeed
+            using (StreamReader r = new StreamReader("../app.Infra/Repository/DatabaseSeed/countries.json"))
+            {
+                string json = r.ReadToEnd();
+                IEnumerable<Country> countries = JsonConvert.DeserializeObject<IEnumerable<Country>>(json);
+                modelBuilder.Entity<Country>().HasData(countries);
+
+            }
+            #endregion
+            #region StateSeed
+            using (StreamReader r = new StreamReader("../app.Infra/Repository/DatabaseSeed/states.json"))
+            {
+                string json = r.ReadToEnd();
+                IEnumerable<State> states = JsonConvert.DeserializeObject<IEnumerable<State>>(json);
+                modelBuilder.Entity<State>().HasData(states);
+
+            }
+
+            #endregion
+            #region CitySeed
+            using (StreamReader r = new StreamReader("../app.Infra/Repository/DatabaseSeed/cities.json"))
+            {
+                string json = r.ReadToEnd();
+                IEnumerable<City> cities = JsonConvert.DeserializeObject<IEnumerable<City>>(json);
+                modelBuilder.Entity<City>().HasData(cities);
+
+            }
+            #endregion
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

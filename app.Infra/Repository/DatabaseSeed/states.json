@@ -1,0 +1,226 @@
+[
+	{
+		"Id" : 1,
+		"Name" : "Acre",
+		"Initials" : "AC",
+		"IBGECode" : 12,
+		"CountryId" : 1,
+		"NumberCode" : "68"
+	},
+	{
+		"Id" : 2,
+		"Name" : "Alagoas",
+		"Initials" : "AL",
+		"IBGECode" : 27,
+		"CountryId" : 1,
+		"NumberCode" : "82"
+	},
+	{
+		"Id" : 3,
+		"Name" : "Amazonas",
+		"Initials" : "AM",
+		"IBGECode" : 13,
+		"CountryId" : 1,
+		"NumberCode" : "97,92"
+	},
+	{
+		"Id" : 4,
+		"Name" : "Amapá",
+		"Initials" : "AP",
+		"IBGECode" : 16,
+		"CountryId" : 1,
+		"NumberCode" : "96"
+	},
+	{
+		"Id" : 5,
+		"Name" : "Bahia",
+		"Initials" : "BA",
+		"IBGECode" : 29,
+		"CountryId" : 1,
+		"NumberCode" : "77,75,73,74,71"
+	},
+	{
+		"Id" : 6,
+		"Name" : "Ceará",
+		"Initials" : "CE",
+		"IBGECode" : 23,
+		"CountryId" : 1,
+		"NumberCode" : "88,85"
+	},
+	{
+		"Id" : 7,
+		"Name" : "Distrito Federal",
+		"Initials" : "DF",
+		"IBGECode" : 53,
+		"CountryId" : 1,
+		"NumberCode" : "61"
+	},
+	{
+		"Id" : 8,
+		"Name" : "Espírito Santo",
+		"Initials" : "ES",
+		"IBGECode" : 32,
+		"CountryId" : 1,
+		"NumberCode" : "28,27"
+	},
+	{
+		"Id" : 9,
+		"Name" : "Goiás",
+		"Initials" : "GO",
+		"IBGECode" : 52,
+		"CountryId" : 1,
+		"NumberCode" : "62,64,61"
+	},
+	{
+		"Id" : 10,
+		"Name" : "Maranhão",
+		"Initials" : "MA",
+		"IBGECode" : 21,
+		"CountryId" : 1,
+		"NumberCode" : "99,98"
+	},
+	{
+		"Id" : 11,
+		"Name" : "Minas Gerais",
+		"Initials" : "MG",
+		"IBGECode" : 31,
+		"CountryId" : 1,
+		"NumberCode" : "34,37,31,33,35,38,32"
+	},
+	{
+		"Id" : 12,
+		"Name" : "Mato Grosso do Sul",
+		"Initials" : "MS",
+		"IBGECode" : 50,
+		"CountryId" : 1,
+		"NumberCode" : "67"
+	},
+	{
+		"Id" : 13,
+		"Name" : "Mato Grosso",
+		"Initials" : "MT",
+		"IBGECode" : 51,
+		"CountryId" : 1,
+		"NumberCode" : "65,66"
+	},
+	{
+		"Id" : 14,
+		"Name" : "Pará",
+		"Initials" : "PA",
+		"IBGECode" : 15,
+		"CountryId" : 1,
+		"NumberCode" : "91,94,93"
+	},
+	{
+		"Id" : 15,
+		"Name" : "Paraíba",
+		"Initials" : "PB",
+		"IBGECode" : 25,
+		"CountryId" : 1,
+		"NumberCode" : "83"
+	},
+	{
+		"Id" : 16,
+		"Name" : "Pernambuco",
+		"Initials" : "PE",
+		"IBGECode" : 26,
+		"CountryId" : 1,
+		"NumberCode" : "81,87"
+	},
+	{
+		"Id" : 17,
+		"Name" : "Piauí",
+		"Initials" : "PI",
+		"IBGECode" : 22,
+		"CountryId" : 1,
+		"NumberCode" : "89,86"
+	},
+	{
+		"Id" : 18,
+		"Name" : "Paraná",
+		"Initials" : "PR",
+		"IBGECode" : 41,
+		"CountryId" : 1,
+		"NumberCode" : "43,41,42,44,45,46"
+	},
+	{
+		"Id" : 19,
+		"Name" : "Rio de Janeiro",
+		"Initials" : "RJ",
+		"IBGECode" : 33,
+		"CountryId" : 1,
+		"NumberCode" : "24,22,21"
+	},
+	{
+		"Id" : 20,
+		"Name" : "Rio Grande do Norte",
+		"Initials" : "RN",
+		"IBGECode" : 24,
+		"CountryId" : 1,
+		"NumberCode" : "84"
+	},
+	{
+		"Id" : 21,
+		"Name" : "Rondônia",
+		"Initials" : "RO",
+		"IBGECode" : 11,
+		"CountryId" : 1,
+		"NumberCode" : "69"
+	},
+	{
+		"Id" : 22,
+		"Name" : "Roraima",
+		"Initials" : "RR",
+		"IBGECode" : 14,
+		"CountryId" : 1,
+		"NumberCode" : "95"
+	},
+	{
+		"Id" : 23,
+		"Name" : "Rio Grande do Sul",
+		"Initials" : "RS",
+		"IBGECode" : 43,
+		"CountryId" : 1,
+		"NumberCode" : "53,54,55,51"
+	},
+	{
+		"Id" : 24,
+		"Name" : "Santa Catarina",
+		"Initials" : "SC",
+		"IBGECode" : 42,
+		"CountryId" : 1,
+		"NumberCode" : "47,48,49"
+	},
+	{
+		"Id" : 25,
+		"Name" : "Sergipe",
+		"Initials" : "SE",
+		"IBGECode" : 28,
+		"CountryId" : 1,
+		"NumberCode" : "79"
+	},
+	{
+		"Id" : 26,
+		"Name" : "São Paulo",
+		"Initials" : "SP",
+		"IBGECode" : 35,
+		"CountryId" : 1,
+		"NumberCode" : "11,12,13,14,15,16,17,18,19"
+	},
+	{
+		"Id" : 27,
+		"Name" : "Tocantins",
+		"Initials" : "TO",
+		"IBGECode" : 17,
+		"CountryId" : 1,
+		"NumberCode" : "63"
+	},
+	{
+		"Id" : 99,
+		"Name" : "Exterior",
+		"Initials" : "EX",
+		"IBGECode" : 99,
+		"CountryId" : null,
+		"NumberCode" : null
+	}
+]
