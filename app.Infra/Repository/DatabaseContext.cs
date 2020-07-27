@@ -12,10 +12,12 @@ namespace Infra.Repository
     {
         private readonly DatabaseSettings _databaseSettings;
 
-        public DatabaseContext(DbContextOptions<DatabaseContext> options, IOptions<DatabaseSettings> databaseSettings) : base(options) {
+        public DatabaseContext(DbContextOptions<DatabaseContext> options, IOptions<DatabaseSettings> databaseSettings) : base(options)
+        {
             _databaseSettings = databaseSettings.Value;
         }
         public DbSet<User> User { get; set; }
+        public DbSet<Address> Address { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<State> State { get; set; }
         public DbSet<City> City { get; set; }
@@ -25,6 +27,7 @@ namespace Infra.Repository
             optionsBuilder.UseMySql(_databaseSettings.SqlDatabase, builder =>
             {
                 builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+                builder.MigrationsAssembly("Api");
             });
 
             base.OnConfiguring(optionsBuilder);

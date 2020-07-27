@@ -13,5 +13,6 @@ namespace Domain.Entities
    
         [JsonIgnore]
         public string Password { get; set; }
+        public string Thumbnail { get; set; }
     }
 }
