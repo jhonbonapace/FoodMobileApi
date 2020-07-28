@@ -1,6 +1,7 @@
 ﻿using Application.DTO;
 using Application.Interface;
 using CrossCuting.Extensions;
+using CrossCutting.Extensions;
 using Domain.Entities;
 using Domain.Helpers;
 using Infra.Repository;
@@ -14,10 +15,14 @@ namespace Application.Services
 
     public class UserService : IUserService
     {
+        Serilog.Core.Logger _logger;
         private IUserRepository _userRepository;
         private AppSettings _appSettings;
         public UserService(DatabaseContext context, AppSettings appSettings)
         {
+            LoggerExtension logger = new LoggerExtension();
+            _logger = logger.CreateLogger();
+
             _userRepository = new UserRepository(context);
             _appSettings = appSettings;
         }
@@ -41,9 +46,9 @@ namespace Application.Services
                 model.Response.Success = true;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _logger.Error(ex, ex.Message);
                 model.Response.Success = false;
             }
 
@@ -63,9 +68,9 @@ namespace Application.Services
                 model.Response.Success = true;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _logger.Error(ex, ex.Message);
                 model.Response.Success = false;
             }
 
@@ -94,9 +99,9 @@ namespace Application.Services
                     model.Response.Success = false;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _logger.Error(ex, ex.Message);
                 model.Response.Success = false;
             }
 
@@ -114,8 +119,9 @@ namespace Application.Services
                 model.Response.Success = true;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.Error(ex, ex.Message);
                 model.Response.Success = false;
             }
 
@@ -147,9 +153,9 @@ namespace Application.Services
                     model.Success = false;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _logger.Error(ex, ex.Message);
                 model.Success = false;
             }
 
@@ -167,9 +173,9 @@ namespace Application.Services
 
                 model.Success = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _logger.Error(ex, ex.Message);
                 model.Success = false;
             }
 
@@ -187,9 +193,9 @@ namespace Application.Services
 
                 model.Success = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _logger.Error(ex, ex.Message);
                 model.Success = false;
             }
 

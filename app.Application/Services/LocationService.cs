@@ -1,5 +1,6 @@
 ﻿using Application.DTO;
 using Application.Interface;
+using CrossCutting.Extensions;
 using Domain.Entities.Location;
 using Infra.Repository;
 using Infra.Repository.Implementation;
@@ -11,10 +12,15 @@ namespace Application.Services
 {
     public class LocationService : ILocationService
     {
+        Serilog.Core.Logger _logger;
+
         private ILocationRepository _locationRepository;
 
         public LocationService(DatabaseContext context)
         {
+            LoggerExtension logger = new LoggerExtension();
+            _logger = logger.CreateLogger();
+
             _locationRepository = new LocationRespository(context);
         }
 
@@ -29,8 +35,9 @@ namespace Application.Services
                 model.Response.Success = true;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.Error(ex, ex.Message);
                 model.Response.Success = false;
             }
 
@@ -48,8 +55,9 @@ namespace Application.Services
                 model.Response.Success = true;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.Error(ex, ex.Message);
                 model.Response.Success = false;
             }
 
@@ -66,8 +74,9 @@ namespace Application.Services
                 model.Response.Success = true;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.Error(ex, ex.Message);
                 model.Response.Success = false;
             }
 

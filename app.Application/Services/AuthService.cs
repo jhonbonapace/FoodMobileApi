@@ -1,6 +1,7 @@
 ﻿using Application.DTO;
 using Application.DTO.Auth;
 using Application.Interface;
+using CrossCutting.Extensions;
 using Domain.Entities;
 using Domain.Helpers;
 using Infra.Repository;
@@ -15,11 +16,15 @@ namespace Application.Services
 {
     public class AuthService : IAuthService
     {
+        Serilog.Core.Logger _logger;
         private readonly AppSettings _appSettings;
         private readonly DatabaseContext _context;
 
         public AuthService(IOptions<AppSettings> appSettings, DatabaseContext context)
         {
+            LoggerExtension logger = new LoggerExtension();
+            _logger = logger.CreateLogger();
+
             _appSettings = appSettings.Value;
             _context = context;
         }
@@ -48,9 +53,9 @@ namespace Application.Services
                     model.Response.Success = false;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _logger.Error(ex,ex.Message);
                 model.Response.Success = false;
             }
 
