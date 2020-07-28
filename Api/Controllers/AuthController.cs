@@ -1,10 +1,8 @@
 ﻿using Application.DTO.Auth;
 using Application.Interface;
-using Infra.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MySql.Data.MySqlClient;
 using System;
 
 namespace Api.Controllers
