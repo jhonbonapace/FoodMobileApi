@@ -9,5 +9,6 @@ namespace Application.Interface
     {
         User Get(int Id);
         User Get(string Username, string Password);
+        bool Add(User user);
     }
 }

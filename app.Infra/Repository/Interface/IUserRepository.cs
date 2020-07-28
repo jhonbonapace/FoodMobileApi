@@ -8,10 +8,10 @@ namespace Infra.Repository.Interface
     public interface IUserRepository
     {
         User Get(int Id);
-        User Get(string Email, string Password);
+        User Get(string Email);
         IEnumerable<User> List();
-        bool Incluir(User user);
+        bool Add(User user);
         bool Update(User user);
-        bool Excluir(int Id);
+        bool Delete(int Id);
     }
 }

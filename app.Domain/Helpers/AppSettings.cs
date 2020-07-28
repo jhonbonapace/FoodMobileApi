@@ -8,5 +8,6 @@ namespace Domain.Helpers
     {
         public string Secret { get; set; }
         public int DaysToExpire { get; set; }
+        public int WorkFactor { get; set; }
     }
 }

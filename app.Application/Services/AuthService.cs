@@ -25,7 +25,7 @@ namespace Application.Services
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model)
         {
-            IUserService userService = new UserService(_context);
+            IUserService userService = new UserService(_context, _appSettings);
 
             var user = userService.Get(model.Email, model.Password);
 
@@ -35,7 +35,6 @@ namespace Application.Services
 
             return new AuthenticateResponse(user, token);
         }
-
 
         private string GenerateAuthToken(User user)
         {

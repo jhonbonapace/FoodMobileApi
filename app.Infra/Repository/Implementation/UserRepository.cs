@@ -20,10 +20,10 @@ namespace Infra.Repository.Implementation
             return _context.User.Where(
                      p => p.Id == Id).FirstOrDefault();
         }
-        public User Get(string Email, string Password)
+        public User Get(string Email)
         {
             return _context.User.Where(
-                     p => p.Email == Email && p.Password == Password).FirstOrDefault();
+                     p => p.Email == Email).FirstOrDefault();
         }
 
         public IEnumerable<User> List()
@@ -32,7 +32,7 @@ namespace Infra.Repository.Implementation
                 .OrderBy(p => p.Id).ToList();
         }
 
-        public bool Incluir(User user)
+        public bool Add(User user)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace Infra.Repository.Implementation
             return true;
         }
 
-        public bool Excluir(int Id)
+        public bool Delete(int Id)
         {
             try
             {

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations.Schema;
 using static Domain.Enumerators.Enumerator;
 
 namespace Domain.Entities
@@ -14,8 +15,15 @@ namespace Domain.Entities
         public string Thumbnail { get; set; }
         public UserType UserType { get; set; }
         public Profile Profile { get; set; }
-
+        
+        [NotMapped]
         [JsonIgnore]
         public string Password { get; set; }
+        [JsonIgnore]
+        public string PasswordHash { get; set; }
+        [JsonIgnore]
+        public string PasswordSalt { get; set; }
+        [JsonIgnore]
+        public int WorkFactor { get; set; }
     }
 }
