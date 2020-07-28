@@ -1,9 +1,10 @@
-﻿using Application.DTO.Auth;
+﻿using Application.DTO;
+using Application.DTO.Auth;
 
 namespace Application.Interface
 {
     public interface IAuthService
     {
-        AuthenticateResponse Authenticate(AuthenticateRequest model);
+        ResponseModel<AuthenticateResponse> Authenticate(AuthenticateRequest auth);
     }
 }

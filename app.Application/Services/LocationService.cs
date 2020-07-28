@@ -1,4 +1,5 @@
-﻿using Application.Interface;
+﻿using Application.DTO;
+using Application.Interface;
 using Domain.Entities.Location;
 using Infra.Repository;
 using Infra.Repository.Implementation;
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Application.Services
 {
-    public class LocationService: ILocationService
+    public class LocationService : ILocationService
     {
         private ILocationRepository _locationRepository;
 
@@ -17,42 +18,60 @@ namespace Application.Services
             _locationRepository = new LocationRespository(context);
         }
 
-        public IEnumerable<Country> GetCountries()
+        public ResponseModel<IEnumerable<Country>> GetCountries()
         {
+            ResponseModel<IEnumerable<Country>> model = new ResponseModel<IEnumerable<Country>>();
+
             try
             {
-                return _locationRepository.GetCountries();
-            }
-            catch (Exception ex)
-            {
+                model.Response.Data = _locationRepository.GetCountries();
 
-                throw;
+                model.Response.Success = true;
+
             }
+            catch (Exception)
+            {
+                model.Response.Success = false;
+            }
+
+            return model;
         }
 
-        public IEnumerable<State> GetStates(int IdCountry)
+        public ResponseModel<IEnumerable<State>> GetStates(int IdCountry)
         {
+            ResponseModel<IEnumerable<State>> model = new ResponseModel<IEnumerable<State>>();
+
             try
             {
-                return _locationRepository.GetStates(IdCountry);
-            }
-            catch (Exception ex)
-            {
+                model.Response.Data = _locationRepository.GetStates(IdCountry);
 
-                throw;
+                model.Response.Success = true;
+
             }
+            catch (Exception)
+            {
+                model.Response.Success = false;
+            }
+
+            return model;
         }
-        public IEnumerable<City> GetCities(int IdState)
+        public ResponseModel<IEnumerable<City>> GetCities(int IdState)
         {
+            ResponseModel<IEnumerable<City>> model = new ResponseModel<IEnumerable<City>>();
+
             try
             {
-                return _locationRepository.GetCities(IdState);
-            }
-            catch (Exception ex)
-            {
+                model.Response.Data = _locationRepository.GetCities(IdState);
 
-                throw;
+                model.Response.Success = true;
+
             }
+            catch (Exception)
+            {
+                model.Response.Success = false;
+            }
+
+            return model;
         }
     }
 }

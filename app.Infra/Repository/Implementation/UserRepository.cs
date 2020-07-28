@@ -38,14 +38,14 @@ namespace Infra.Repository.Implementation
             {
                 _context.User.Add(user);
                 _context.SaveChanges();
+
+                return true;
             }
             catch (Exception)
             {
 
                 return false;
             }
-
-            return true;
         }
 
         public bool Update(User user)

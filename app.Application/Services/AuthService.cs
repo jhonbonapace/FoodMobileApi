@@ -1,4 +1,5 @@
-﻿using Application.DTO.Auth;
+﻿using Application.DTO;
+using Application.DTO.Auth;
 using Application.Interface;
 using Domain.Entities;
 using Domain.Helpers;
@@ -23,17 +24,38 @@ namespace Application.Services
             _context = context;
         }
 
-        public AuthenticateResponse Authenticate(AuthenticateRequest model)
+        public ResponseModel<AuthenticateResponse> Authenticate(AuthenticateRequest auth)
         {
-            IUserService userService = new UserService(_context, _appSettings);
+            ResponseModel<AuthenticateResponse> model = new ResponseModel<AuthenticateResponse>();
 
-            var user = userService.Get(model.Email, model.Password);
+            try
+            {
+                IUserService userService = new UserService(_context, _appSettings);
 
-            if (user == null) return null;
+                var userResponse = userService.Get(auth.Email, auth.Password);
 
-            var token = GenerateAuthToken(user);
+                if (userResponse.Response.Success)
+                {
 
-            return new AuthenticateResponse(user, token);
+                    var token = GenerateAuthToken(userResponse.Response.Data);
+                    model.Response.Data = new AuthenticateResponse(userResponse.Response.Data, token);
+
+                    model.Response.Success = true;
+                }
+                else
+                {
+                    model.Response.Message = "Username or password is incorrect.";
+                    model.Response.Success = false;
+                }
+            }
+            catch (Exception)
+            {
+
+                model.Response.Success = false;
+            }
+
+            return model;
+
         }
 
         private string GenerateAuthToken(User user)

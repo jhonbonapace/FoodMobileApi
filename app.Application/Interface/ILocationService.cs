@@ -1,14 +1,13 @@
-﻿using Domain.Entities.Location;
-using System;
+﻿using Application.DTO;
+using Domain.Entities.Location;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Application.Interface
 {
     public interface ILocationService
     {
-        IEnumerable<Country> GetCountries();
-        IEnumerable<State> GetStates(int IdCountry);
-        IEnumerable<City> GetCities(int IdState);
+        ResponseModel<IEnumerable<Country>> GetCountries();
+        ResponseModel<IEnumerable<State>> GetStates(int IdCountry);
+        ResponseModel<IEnumerable<City>> GetCities(int IdState);
     }
 }

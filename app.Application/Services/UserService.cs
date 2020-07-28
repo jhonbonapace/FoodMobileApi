@@ -1,4 +1,5 @@
-﻿using Application.Interface;
+﻿using Application.DTO;
+using Application.Interface;
 using CrossCuting.Extensions;
 using Domain.Entities;
 using Domain.Helpers;
@@ -7,7 +8,6 @@ using Infra.Repository.Implementation;
 using Infra.Repository.Interface;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Application.Services
 {
@@ -27,21 +27,55 @@ namespace Application.Services
             _userRepository = new UserRepository(context);
         }
 
-        public User Get(int Id)
+        public ResponseModel<User> Get(int Id)
         {
+            ResponseModel<User> model = new ResponseModel<User>();
+
             try
             {
-                return _userRepository.Get(Id);
+
+                User user = _userRepository.Get(Id);
+
+                model.Response.Data = user;
+
+                model.Response.Success = true;
+
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                model.Response.Success = false;
             }
+
+            return model;
         }
 
-        public User Get(string Email, string Password)
+        public ResponseModel<User> Get(string Email)
         {
+            ResponseModel<User> model = new ResponseModel<User>();
+
+            try
+            {
+                User user = _userRepository.Get(Email);
+
+                model.Response.Data = user;
+
+                model.Response.Success = true;
+
+            }
+            catch (Exception)
+            {
+
+                model.Response.Success = false;
+            }
+
+            return model;
+        }
+
+        public ResponseModel<User> Get(string Email, string Password)
+        {
+            ResponseModel<User> model = new ResponseModel<User>();
+
             try
             {
                 User user = _userRepository.Get(Email);
@@ -51,75 +85,115 @@ namespace Application.Services
                     AuthExtensions authExtensions = new AuthExtensions(_appSettings);
 
                     user.Password = Password;
-                    bool IsValid = authExtensions.ValidatePassword(user);
 
-                    return IsValid ? user : null;
+                    model.Response.Success = authExtensions.ValidatePassword(user);
+
+                    model.Response.Data = model.Response.Success ? user : null;
                 }
+                else
+                    model.Response.Success = false;
 
-                return null;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                model.Response.Success = false;
             }
+
+            return model;
         }
 
-        public IEnumerable<User> List()
+        public ResponseModel<IEnumerable<User>> List()
         {
+            ResponseModel<IEnumerable<User>> model = new ResponseModel<IEnumerable<User>>();
+
             try
             {
-                return _userRepository.List();
-            }
-            catch (Exception ex)
-            {
+                model.Response.Data = _userRepository.List();
 
-                throw ex;
+                model.Response.Success = true;
+
             }
+            catch (Exception)
+            {
+                model.Response.Success = false;
+            }
+
+            return model;
         }
 
-        public bool Add(User user)
+        public ResponseModel Add(User user)
         {
+
+            ResponseModel model = new ResponseModel();
+
             try
             {
-                AuthExtensions authExtensions = new AuthExtensions(_appSettings);
+                User HasUser = _userRepository.Get(user.Email);
 
-                authExtensions.GeneratePassword(ref user);
+                if (HasUser is null)
+                {
+                    AuthExtensions authExtensions = new AuthExtensions(_appSettings);
 
-                return _userRepository.Add(user);
+                    authExtensions.GeneratePassword(ref user);
 
+                    _userRepository.Add(user);
+
+                    model.Success = true;
+                }
+                else
+                {
+                    model.Message = "The email already exists.";
+                    model.Success = false;
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                model.Success = false;
             }
+
+            return model;
         }
 
-        public bool Update(User user)
+        public ResponseModel Update(User user)
         {
+
+            ResponseModel model = new ResponseModel();
+
             try
             {
-                return _userRepository.Update(user);
+                _userRepository.Update(user);
+
+                model.Success = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw;
+                model.Success = false;
             }
+
+            return model;
         }
 
-        public bool Delete(int Id)
+        public ResponseModel Delete(int Id)
         {
+
+            ResponseModel model = new ResponseModel();
+
             try
             {
-                return _userRepository.Delete(Id);
+                _userRepository.Delete(Id);
+
+                model.Success = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                model.Success = false;
             }
+
+            return model;
         }
     }
 }

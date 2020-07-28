@@ -1,12 +1,5 @@
-﻿using BCrypt.Net;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Helpers;
-using MongoDB.Driver.Core.Authentication;
-using System;
-using System.Collections.Generic;
-using System.Net.WebSockets;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace CrossCuting.Extensions
 {

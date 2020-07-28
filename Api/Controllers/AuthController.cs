@@ -33,8 +33,8 @@ namespace Api.Controllers
 
                 var response = _authService.Authenticate(model);
 
-                if (response == null)
-                    return BadRequest(new { message = "Username or password is incorrect" });
+                if (!response.Response.Success)
+                    return Unauthorized(response.Response);
 
                 return Ok(response);
             }

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Analyzer.CrossCutting.Lib.Util
+namespace CrossCutting.Util
 {
     public class Serializer
     {
