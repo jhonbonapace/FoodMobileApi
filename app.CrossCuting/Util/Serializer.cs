@@ -19,7 +19,7 @@ namespace CrossCutting.Util
             return JsonString;
         }
 
-        public static T Deserialize<T>(T type, string JsonString)
+        public static T Deserialize<T>(string JsonString)
         {
 
             return JsonConvert.DeserializeObject<T>(JsonString, settings);

@@ -25,6 +25,7 @@ namespace Api
         {
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            services.Configure<MapBoxSettings>(Configuration.GetSection("MapBoxSettings"));
 
             services.Configure<DatabaseSettings>(Configuration.GetSection("ConnectionStrings"));
 
