@@ -29,7 +29,7 @@ namespace Application.Services
             _context = context;
         }
 
-        public ResponseModel<AuthenticateResponse> Authenticate(AuthenticateRequest auth)
+        public ResponseModel<AuthenticateResponse> Authenticate(AuthenticateRequest auth, bool IsRegistration = false)
         {
             ResponseModel<AuthenticateResponse> model = new ResponseModel<AuthenticateResponse>();
 
@@ -37,13 +37,19 @@ namespace Application.Services
             {
                 IUserService userService = new UserService(_context, _appSettings);
 
-                var userResponse = userService.Get(auth.Email, auth.Password);
+                ResponseModel<User> response;
 
-                if (userResponse.Response.Success)
+                if (!IsRegistration)
+                    response = userService.Get(auth.Email, auth.Password);
+                else
+                    response = userService.Get(auth.Email);
+
+
+                if (response.Response.Success)
                 {
 
-                    var token = GenerateAuthToken(userResponse.Response.Data);
-                    model.Response.Data = new AuthenticateResponse(userResponse.Response.Data, token);
+                    var token = GenerateAuthToken(response.Response.Data);
+                    model.Response.Data = new AuthenticateResponse(response.Response.Data, token);
 
                     model.Response.Success = true;
                 }
@@ -55,7 +61,7 @@ namespace Application.Services
             }
             catch (Exception ex)
             {
-                _logger.Error(ex,ex.Message);
+                _logger.Error(ex, ex.Message);
                 model.Response.Success = false;
             }
 

@@ -5,6 +5,6 @@ namespace Application.Interface
 {
     public interface IAuthService
     {
-        ResponseModel<AuthenticateResponse> Authenticate(AuthenticateRequest auth);
+        ResponseModel<AuthenticateResponse> Authenticate(AuthenticateRequest auth, bool IsRegistration = false);
     }
 }

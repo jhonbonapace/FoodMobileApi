@@ -149,7 +149,7 @@ namespace Application.Services
                 }
                 else
                 {
-                    model.Message = "The email already exists.";
+                    model.Message = "O email informado já existe.";
                     model.Success = false;
                 }
             }

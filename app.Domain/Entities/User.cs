@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using static Domain.Enumerators.Enumerator;
 
@@ -10,7 +11,7 @@ namespace Domain.Entities
         public string Email { get; set; }
         public string Identity { get; set; }
         public string Telephone { get; set; }
-        public string BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         public string Gender { get; set; }
         public string Thumbnail { get; set; }
         public UserType UserType { get; set; }

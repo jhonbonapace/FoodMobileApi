@@ -34,6 +34,9 @@ namespace Api.Controllers
                 if (!response.Response.Success)
                     return Unauthorized(response.Response);
 
+                _logger.LogInformation($"Acesso concedido a {response.Response.Data.Name}");
+
+
                 return Ok(response);
             }
             catch (Exception ex)
