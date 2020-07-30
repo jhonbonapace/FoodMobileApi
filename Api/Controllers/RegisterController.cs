@@ -43,7 +43,7 @@ namespace Api.Controllers
                 var response  = _userService.Add(user);
 
 
-                if(!response.Success)
+                if(!response.Response.Success)
                     return Ok(response);
                 else
                 {

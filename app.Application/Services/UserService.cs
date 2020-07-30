@@ -128,10 +128,10 @@ namespace Application.Services
             return model;
         }
 
-        public ResponseModel Add(User user)
+        public ResponseModel<User> Add(User user)
         {
 
-            ResponseModel model = new ResponseModel();
+            ResponseModel<User> model = new ResponseModel<User>();
 
             try
             {
@@ -145,18 +145,18 @@ namespace Application.Services
 
                     _userRepository.Add(user);
 
-                    model.Success = true;
+                    model.Response.Success = true;
                 }
                 else
                 {
-                    model.Message = "O email informado já existe.";
-                    model.Success = false;
+                    model.Response.Message = "O email informado já existe.";
+                    model.Response.Success = false;
                 }
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Success = false;
+                model.Response.Success = false;
             }
 
             return model;

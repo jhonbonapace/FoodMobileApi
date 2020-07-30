@@ -12,7 +12,7 @@ namespace Application.Interface
         ResponseModel<User> Get(string Email);
         ResponseModel<User> Get(string Username, string Password);
         ResponseModel<IEnumerable<User>> List();
-        ResponseModel Add(User user);
+        ResponseModel<User> Add(User user);
         ResponseModel Update(User user);
         ResponseModel Delete(int Id);
     }
