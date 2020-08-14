@@ -31,7 +31,7 @@ namespace Api.Controllers
         }
 
 
-        [Authorize]
+      
         [HttpGet("Location/Search")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> LocationSearch([FromQuery] string location)
