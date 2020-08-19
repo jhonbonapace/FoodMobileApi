@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Infra.Repository.Implementation
 {
-    public class LocationRespository: ILocationRepository
+    public class LocationRespository : ILocationRepository
     {
         private DatabaseContext _context;
 

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20200727035419_Countries")]
-    partial class Countries
+    [Migration("20200818042657_DbInit")]
+    partial class DbInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,30 @@ namespace Api.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("Domain.Entities.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comment");
+                });
 
             modelBuilder.Entity("Domain.Entities.Contact", b =>
                 {
@@ -45,6 +69,66 @@ namespace Api.Migrations
                     b.HasIndex("ProfileId");
 
                     b.ToTable("Contact");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<double>("Rating")
+                        .HasColumnType("double");
+
+                    b.Property<byte[]>("Thumbnail")
+                        .HasColumnType("longblob");
+
+                    b.Property<TimeSpan>("TimeClose")
+                        .HasColumnType("time(6)");
+
+                    b.Property<TimeSpan>("TimeOpen")
+                        .HasColumnType("time(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customer");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Facilitie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Facilitie");
                 });
 
             modelBuilder.Entity("Domain.Entities.Location.Address", b =>
@@ -167,6 +251,25 @@ namespace Api.Migrations
                     b.ToTable("State");
                 });
 
+            modelBuilder.Entity("Domain.Entities.PaymentMethod", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("PaymentMethod");
+                });
+
             modelBuilder.Entity("Domain.Entities.Profile", b =>
                 {
                     b.Property<int>("Id")
@@ -193,14 +296,55 @@ namespace Api.Migrations
                     b.ToTable("Profile");
                 });
 
+            modelBuilder.Entity("Domain.Entities.SpecificOff", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateEnd")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("DateStart")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("SpecificOff");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Tag");
+                });
+
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("BirthDate")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -214,7 +358,10 @@ namespace Api.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("PasswordSalt")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int?>("ProfileId")
@@ -229,6 +376,9 @@ namespace Api.Migrations
                     b.Property<int>("UserType")
                         .HasColumnType("int");
 
+                    b.Property<int>("WorkFactor")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProfileId");
@@ -236,11 +386,76 @@ namespace Api.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("Domain.Entities.WorkDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("TimeClose")
+                        .HasColumnType("time(6)");
+
+                    b.Property<TimeSpan>("TimeOpen")
+                        .HasColumnType("time(6)");
+
+                    b.Property<int>("WeekDay")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("WorkDay");
+                });
+
+            modelBuilder.Entity("Domain.Entities.WorkDayTimeOff", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("TimeEnd")
+                        .HasColumnType("time(6)");
+
+                    b.Property<TimeSpan>("TimeStart")
+                        .HasColumnType("time(6)");
+
+                    b.Property<int?>("WorkDayId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WorkDayId");
+
+                    b.ToTable("WorkDayTimeOff");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Comment", b =>
+                {
+                    b.HasOne("Domain.Entities.Customer", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("CustomerId");
+
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("Domain.Entities.Contact", b =>
                 {
                     b.HasOne("Domain.Entities.Profile", null)
                         .WithMany("Contacts")
                         .HasForeignKey("ProfileId");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Facilitie", b =>
+                {
+                    b.HasOne("Domain.Entities.Customer", null)
+                        .WithMany("Facilities")
+                        .HasForeignKey("CustomerId");
                 });
 
             modelBuilder.Entity("Domain.Entities.Location.Address", b =>
@@ -274,11 +489,46 @@ namespace Api.Migrations
                         .HasForeignKey("CountryId");
                 });
 
+            modelBuilder.Entity("Domain.Entities.PaymentMethod", b =>
+                {
+                    b.HasOne("Domain.Entities.Customer", null)
+                        .WithMany("PaymentMethods")
+                        .HasForeignKey("CustomerId");
+                });
+
+            modelBuilder.Entity("Domain.Entities.SpecificOff", b =>
+                {
+                    b.HasOne("Domain.Entities.Customer", null)
+                        .WithMany("DaysOff")
+                        .HasForeignKey("CustomerId");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Tag", b =>
+                {
+                    b.HasOne("Domain.Entities.Customer", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("CustomerId");
+                });
+
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
                     b.HasOne("Domain.Entities.Profile", "Profile")
                         .WithMany()
                         .HasForeignKey("ProfileId");
+                });
+
+            modelBuilder.Entity("Domain.Entities.WorkDay", b =>
+                {
+                    b.HasOne("Domain.Entities.Customer", null)
+                        .WithMany("WorkDays")
+                        .HasForeignKey("CustomerId");
+                });
+
+            modelBuilder.Entity("Domain.Entities.WorkDayTimeOff", b =>
+                {
+                    b.HasOne("Domain.Entities.WorkDay", null)
+                        .WithMany("DayTimeOffs")
+                        .HasForeignKey("WorkDayId");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,3 +1,4 @@
+using System;
 using Api.Middlewares;
 using Domain.Helpers;
 using Infra.Repository;
@@ -7,7 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
+using Serilog;
+using Serilog.Core;
 
 namespace Api
 {
@@ -30,7 +32,10 @@ namespace Api
             services.Configure<DatabaseSettings>(Configuration.GetSection("ConnectionStrings"));
 
             services.AddDbContext<DatabaseContext>();
-         
+            // services.AddDbContextPool<DatabaseContext>(
+            //     options => options.UseMySql(Configuration.GetConnectionString("SqlDatabase")
+            // ));
+
             services.ConfigureDependencies();
 
             services.AddCors();
@@ -40,7 +45,11 @@ namespace Api
                 o.JsonSerializerOptions.PropertyNamingPolicy = null;
                 o.JsonSerializerOptions.DictionaryKeyPolicy = null;
             });
-   
+
+            Logger logger = new LoggerConfiguration()
+                .WriteTo.Console()
+                .CreateLogger();
+            services.AddSingleton(logger);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,9 +67,9 @@ namespace Api
             app.UseRouting();
 
             app.UseCors(x => x
-             .AllowAnyOrigin()
-             .AllowAnyMethod()
-             .AllowAnyHeader());
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseAuthentication();
 

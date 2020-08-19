@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\app.CrossCuting\CrossCuting.csproj" />
-    <ProjectReference Include="..\app.Infra\Infra.csproj" />
+    <ProjectReference Include="..\CrossCuting\CrossCuting.csproj" />
+    <ProjectReference Include="..\Infra\Infra.csproj" />
   </ItemGroup>
 
 </Project>

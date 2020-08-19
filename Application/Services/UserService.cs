@@ -1,4 +1,6 @@
-﻿using Application.DTO;
+﻿using System;
+using System.Collections.Generic;
+using Application.DTO;
 using Application.Interface;
 using CrossCuting.Extensions;
 using CrossCutting.Extensions;
@@ -7,8 +9,6 @@ using Domain.Helpers;
 using Infra.Repository;
 using Infra.Repository.Implementation;
 using Infra.Repository.Interface;
-using System;
-using System.Collections.Generic;
 
 namespace Application.Services
 {

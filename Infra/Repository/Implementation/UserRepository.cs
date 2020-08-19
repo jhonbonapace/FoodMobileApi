@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Infra.Repository.Implementation
 {
-    public class UserRepository: IUserRepository
+    public class UserRepository : IUserRepository
     {
         private DatabaseContext _context;
 
@@ -57,7 +57,7 @@ namespace Infra.Repository.Implementation
 
                 selectedUser.Name = user.Name;
                 selectedUser.Identity = user.Identity;
-                selectedUser.Telephone = user.Telephone;              
+                selectedUser.Telephone = user.Telephone;
                 selectedUser.BirthDate = user.BirthDate;
                 _context.SaveChanges();
 

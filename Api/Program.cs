@@ -9,20 +9,14 @@ namespace Api
     {
         public static void Main(string[] args)
         {
-            #region Serilog configuration
-            LoggerExtension logger = new LoggerExtension();
-            logger.CreateLogger();
-
             CreateHostBuilder(args).Build().Run();
-            #endregion
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseSerilog();
-                    webBuilder.UseStartup<Startup>();
-                });
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
     }
 }

@@ -1,12 +1,11 @@
-﻿using Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using Domain.Entities;
 using Domain.Entities.Location;
 using Domain.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace Infra.Repository
 {
@@ -20,6 +19,7 @@ namespace Infra.Repository
             _databaseSettings = databaseSettings.Value;
         }
         public DbSet<User> User { get; set; }
+        public DbSet<Customer> Customer { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<State> State { get; set; }
@@ -31,6 +31,7 @@ namespace Infra.Repository
             {
                 builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
                 builder.MigrationsAssembly("Api");
+                builder.CommandTimeout(240);
             });
 
             base.OnConfiguring(optionsBuilder);

@@ -16,7 +16,7 @@ namespace Domain.Entities
         public string Thumbnail { get; set; }
         public UserType UserType { get; set; }
         public Profile Profile { get; set; }
-        
+
         [NotMapped]
         [JsonIgnore]
         public string Password { get; set; }

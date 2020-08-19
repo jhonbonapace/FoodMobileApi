@@ -10,11 +10,11 @@ namespace Api
     {
         public static IServiceCollection ConfigureDependencies(this IServiceCollection services)
         {
-            services.AddTransient<RestaurantService>();
+            services.AddTransient<CustomerService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
 
-            services.AddScoped<IRestaurantRepository, RestaurantRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
 
             return services;
         }

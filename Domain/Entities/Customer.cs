@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities
@@ -7,21 +8,41 @@ namespace Domain.Entities
     {
         // [Required]
         // [StringLength(100)]
-        public string Name { get; private set; }
-        public byte[] Thumbnail { get; private set; }
-        public double Rating { get; private set; }
-        public double Latitude { get; private set; }
-        public double Longitude { get; private set; }
-        public TimeSpan TimeOpen { get; private set; }
-        public TimeSpan TimeClose { get; private set; }
-        public IEnumerable<Tag> Tags { get; private set; }
-        public IEnumerable<WorkDay> WorkDays { get; private set; }
-        public IEnumerable<SpecificOff> DaysOff { get; private set; }
-        public IEnumerable<Comment> Comments { get; private set; }
-        public IEnumerable<PaymentMethod> Comments { get; private set; }
-        public IEnumerable<Facilitie> Comments { get; private set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public byte[] Thumbnail { get; set; }
+        public double Rating { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public TimeSpan TimeOpen { get; set; }
+        public TimeSpan TimeClose { get; set; }
+        public IEnumerable<Tag> Tags { get; set; }
+        public IEnumerable<WorkDay> WorkDays { get; set; }
+        public IEnumerable<SpecificOff> DaysOff { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
+        public IEnumerable<PaymentMethod> PaymentMethods { get; set; }
+        public IEnumerable<Facilitie> Facilities { get; set; }
 
         private Customer() { }
+
+        public Customer(string name, string description, byte[] thumbnail, double rating, double latitude, double longitude, TimeSpan timeOpen, TimeSpan timeClose,
+            IEnumerable<Tag> tags, IEnumerable<WorkDay> workDays, IEnumerable<SpecificOff> daysOff, IEnumerable<PaymentMethod> paymentMethods, IEnumerable<Facilitie> facilities)
+        {
+            Name = name;
+            Description = description;
+            Thumbnail = thumbnail;
+            Rating = rating;
+            Latitude = latitude;
+            Longitude = longitude;
+            TimeOpen = timeOpen;
+            TimeClose = timeClose;
+            Tags = tags;
+            WorkDays = workDays;
+            DaysOff = daysOff;
+            Comments = new List<Comment>();
+            PaymentMethods = paymentMethods;
+            Facilities = facilities;
+        }
 
         // public Customer(string name)
         // {

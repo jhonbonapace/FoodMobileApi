@@ -13,18 +13,18 @@ namespace Domain.Entities
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public string Name { get; private set; }
-        public byte[] Thumbnail { get; private set; }
-        public double Rating { get; private set; }
-        public double Latitude { get; private set; }
-        public double Longitude { get; private set; }
-        public TimeSpan TimeOpen { get; private set; }
-        public TimeSpan TimeClose { get; private set; }
-        public Coordinates2D Location { get; private set; }
-        public IEnumerable<RestaurantTag> Tags { get; private set; }
-        public IEnumerable<RestaurantWorkDay> WorkDays { get; private set; }
-        public IEnumerable<RestaurantSpecificOff> DaysOff { get; private set; }
-        public IEnumerable<Comment> Comments { get; private set; }
+        public string Name { get; set; }
+        public byte[] Thumbnail { get; set; }
+        public double Rating { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public TimeSpan TimeOpen { get; set; }
+        public TimeSpan TimeClose { get; set; }
+        public Coordinates2D Location { get; set; }
+        public IEnumerable<RestaurantTag> Tags { get; set; }
+        public IEnumerable<RestaurantWorkDay> WorkDays { get; set; }
+        public IEnumerable<RestaurantSpecificOff> DaysOff { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
 
         public Restaurant(string name, byte[] thumbnail, double latitude, double longitude, TimeSpan timeOpen, TimeSpan timeClose, IEnumerable<string> tags)
         {
