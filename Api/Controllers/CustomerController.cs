@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Application.Attributes;
 using Application.DTO;
 using Application.Services;
+using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -34,6 +35,49 @@ namespace Api.Controllers
                 _customerService.Add(customerDto);
 
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError(ex, ex.Message);
+
+                return StatusCode(500);
+            }
+        }
+
+        [HttpGet]
+        // [Authorize]
+        [Route("GetObject")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult GetObject()
+        {
+            try
+            {
+                var customerDto = new CustomerDto
+                {
+                    Tags = new List<Tag>
+                    {
+                        new Tag()
+                    },
+                    WorkDays = new List<WorkDay>
+                    {
+                        new WorkDay()
+                    },
+                    DaysOff = new List<SpecificOff>
+                    {
+                        new SpecificOff()
+                    },
+                    PaymentMethods = new List<PaymentMethod>
+                    {
+                        new PaymentMethod()
+                    },
+                    Facilities = new List<Facilitie>
+                    {
+                        new Facilitie()
+                    }
+                };
+                return Ok(customerDto);
             }
             catch (Exception ex)
             {

@@ -6,6 +6,7 @@ using Domain.Entities.Location;
 using Domain.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace Infra.Repository
 {
