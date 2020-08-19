@@ -6,7 +6,7 @@ namespace Application.DTO.Mapbox
 {
     public class MapboxPlacesDTO
     {
-        public List<string> query { get; set; }
+        //public List<string> query { get; set; }
         public List<MapboxFeatureDTO> features { get; set; }
     }
 }
