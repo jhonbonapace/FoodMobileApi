@@ -47,6 +47,28 @@ namespace Api.Controllers
 
         [HttpGet]
         // [Authorize]
+        [Route("List")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult List([FromQuery] CustomerListFilterDto customerListFilterDto)
+        {
+            try
+            {
+                var result = _customerService.List(customerListFilterDto);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError(ex, ex.Message);
+
+                return StatusCode(500);
+            }
+        }
+
+        [HttpGet]
+        // [Authorize]
         [Route("GetObject")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

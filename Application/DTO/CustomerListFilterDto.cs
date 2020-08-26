@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Application.DTO
 {
-    public class RestaurantListFilterDTO
+    public class CustomerListFilterDto : PagedResultBase
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }

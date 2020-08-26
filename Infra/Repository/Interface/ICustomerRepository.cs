@@ -5,7 +5,7 @@ namespace Infra.Repository.Interface
 {
     public interface ICustomerRepository
     {
-        IEnumerable<Customer> List();
+        CustomerList List(CustomerFilter customerFilter);
         bool Add(Customer customer);
     }
 }

@@ -22,7 +22,7 @@ namespace Application.Services
             byte[] thumbnail = null;
             if (customerDto.Thumbnail.Length > 0)
             {
-                using(var stream = new MemoryStream())
+                using (var stream = new MemoryStream())
                 {
                     customerDto.Thumbnail.CopyTo(stream);
                     thumbnail = stream.ToArray();
@@ -33,6 +33,18 @@ namespace Application.Services
                 customerDto.Name, customerDto.Description, thumbnail, customerDto.Rating, customerDto.Latitude, customerDto.Longitude,
                 customerDto.TimeOpen, customerDto.TimeClose, customerDto.Tags, customerDto.WorkDays, customerDto.DaysOff,
                 customerDto.PaymentMethods, customerDto.Facilities));
+        }
+
+        public CustomerList List(CustomerListFilterDto customerListFilterDto)
+        {
+            return _customerRepository.List(new CustomerFilter
+            {
+                Latitude = customerListFilterDto.Latitude,
+                Longitude = customerListFilterDto.Longitude,
+                PageSize = customerListFilterDto.PageSize,
+                CurrentPage = customerListFilterDto.CurrentPage,
+                Tags = customerListFilterDto.Tags
+            });
         }
 
         // public IEnumerable<RestaurantListResultDTO> List(RestaurantListFilterDTO restaurantListFilter)

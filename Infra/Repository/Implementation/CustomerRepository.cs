@@ -15,10 +15,29 @@ namespace Infra.Repository.Implementation
             _context = context;
         }
 
-        public IEnumerable<Customer> List()
+        public CustomerList List(CustomerFilter customerFilter)
         {
-            return _context.Customer
-                .OrderBy(p => p.Id).ToList();
+            // var query = _context.Customer.OrderByDescending(x => x.Rating);
+
+            // var (pageCount, results) =
+            //                 _context.Customer
+            //                     .OrderByDescending(x => x.Rating)
+            //                     .GetPaged(customerFilter.CurrentPage, customerFilter.PageSize);
+
+            // var customerList = new CustomerList
+            // {
+            //     Customers = results,
+            //     PageCount = pageCount
+            // };
+
+            var result = _context.Customer.OrderByDescending(x => x.Rating).ToList();
+            var customerList = new CustomerList
+            {
+                Customers = result,
+                PageCount = 1
+            };
+
+            return customerList;
         }
 
         public bool Add(Customer customer)
@@ -35,5 +54,7 @@ namespace Infra.Repository.Implementation
                 return false;
             }
         }
+
+
     }
 }
