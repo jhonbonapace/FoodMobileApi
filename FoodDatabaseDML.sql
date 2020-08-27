@@ -32,17 +32,19 @@ CREATE TABLE `User` (
 CREATE TABLE `State` (
   `Id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `Name` VARCHAR(200) NOT NULL,
-  `IdCountry` INT NOT NULL REFERENCES `Country` (Id),
+  `IdCountry` INT NOT NULL,
   `IBGECode` VARCHAR(10),
   `Initials` CHAR(2),
-  `NumberCode` VARCHAR(10)
+  `NumberCode` VARCHAR(10),
+   FOREIGN KEY(`IdCountry`) REFERENCES Country(Id)
 );
 
 CREATE TABLE `City` (
   `Id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `Name` VARCHAR(200) NOT NULL,
-  `IdState` INT NOT NULL REFERENCES `State` (Id),
-  `IBGECode` VARCHAR(10)
+  `IdState` INT NOT NULL,
+  `IBGECode` VARCHAR(10),
+   FOREIGN KEY(`IdState`) REFERENCES `State`(Id)
 );
 
   CREATE TABLE `Address` (
@@ -54,9 +56,12 @@ CREATE TABLE `City` (
   `ZipCode` VARCHAR(10),
   `Latitude` double,
   `Longitude` double,
-  `IdCountry` INT REFERENCES `Country` (Id),
-  `IdState` INT REFERENCES `State` (Id),
-  `IdCity` INT REFERENCES `City` (Id)
+  `IdCountry` INT,
+  `IdState` INT,
+  `IdCity` INT,
+   FOREIGN KEY(`IdCountry`) REFERENCES `Country`(Id),
+   FOREIGN KEY(`IdState`) REFERENCES `State`(Id),
+   FOREIGN KEY(`IdCity`) REFERENCES `City`(Id)
 );
 
  CREATE TABLE `Facility` (
@@ -86,44 +91,55 @@ CREATE TABLE `City` (
   `Thumbnail` BLOB,
   `ReservationMaxPartySize` INT,
   `ReservationMinPartySize` INT,
-  `IdUser` INT NOT NULL REFERENCES `user` (Id),
-  `IdAddress` INT REFERENCES `address` (Id),
-  `IdNacionalitySpecialty` INT REFERENCES `Country` (Id),
-  `LastUpdate` DATETIME
+  `IdUser` INT NOT NULL,
+  `IdAddress` INT,
+  `IdNacionalitySpecialty` INT,
+  `LastUpdate` DATETIME,
+  FOREIGN KEY(`IdUser`) REFERENCES `user`(Id),
+  FOREIGN KEY(`IdAddress`) REFERENCES `address`(Id),
+  FOREIGN KEY(`IdNacionalitySpecialty`) REFERENCES `Country`(Id)
   );
   
   CREATE TABLE `CustomerFacilities`(
    `Id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-   `IdFacility` INT NOT NULL REFERENCES `Facility` (Id),
-   `IdCustomer` INT NOT NULL REFERENCES `Customer` (Id),
+   `IdFacility` INT NOT NULL,
+   `IdCustomer` INT NOT NULL,
    `IsActive` BIT DEFAULT 0 NOT NULL,
-   `Description` VARCHAR(200)
+   `Description` VARCHAR(200),
+   FOREIGN KEY(`IdFacility`) REFERENCES `Facility`(Id),
+   FOREIGN KEY(`IdCustomer`) REFERENCES `Customer`(Id)
   );
   
    CREATE TABLE `CustomerPaymentMethods`(
    `Id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-   `IdPaymentMethod` INT NOT NULL REFERENCES `PaymentMethod` (Id),
-   `IdCustomer` INT NOT NULL REFERENCES `Customer` (Id)
+   `IdPaymentMethod` INT NOT NULL,
+   `IdCustomer` INT NOT NULL,
+	FOREIGN KEY(`IdPaymentMethod`) REFERENCES `PaymentMethod`(Id),
+    FOREIGN KEY(`IdCustomer`) REFERENCES `Customer`(Id)
   );
   
   CREATE TABLE `CustomerTags`(
    `Id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-   `IdTags` INT NOT NULL REFERENCES `Tags` (Id),
-   `IdCustomer` INT NOT NULL REFERENCES `Customer` (Id)
+   `IdTag` INT NOT NULL,
+   `IdCustomer` INT NOT NULL,
+   FOREIGN KEY(`IdTag`) REFERENCES `Tags`(Id),
+   FOREIGN KEY(`IdCustomer`) REFERENCES `Customer`(Id)
   );
   CREATE TABLE `Contacts`(
    `Id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-   `IdCustomer` INT NOT NULL REFERENCES `Customer` (Id),
+   `IdCustomer` INT NOT NULL,
    `ContactyType` INT NOT NULL,
-   `Description` VARCHAR(500) NOT NULL
+   `Description` VARCHAR(500) NOT NULL,
+    FOREIGN KEY(`IdCustomer`) REFERENCES `Customer`(Id)
   );
   
    CREATE TABLE `ProductCategory`(
    `Id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-   `IdCustomer` INT NOT NULL REFERENCES `Customer` (Id),
+   `IdCustomer` INT NOT NULL,
    `Name` VARCHAR(100) NOT NULL,
    `Description` VARCHAR(500) NOT NULL,
-   `IsExcluded` BIT DEFAULT 0
+   `IsExcluded` BIT DEFAULT 0,
+   FOREIGN KEY(`IdCustomer`) REFERENCES `Customer`(Id)
   );
   
    CREATE TABLE `Product`(
@@ -132,9 +148,10 @@ CREATE TABLE `City` (
    `Description` VARCHAR(500) NOT NULL,
    `Price` DECIMAL(10,2),
    `IsPriceless` BIT,
-   `IdProductCategory` INT NOT NULL REFERENCES `ProductCategory` (Id),
+   `IdProductCategory` INT NOT NULL,
    `ImagePath` VARCHAR(500),
-   `Deleted` BIT DEFAULT 0
+   `Deleted` BIT DEFAULT 0,
+    FOREIGN KEY(`IdProductCategory`) REFERENCES `ProductCategory`(Id)
   );
   
   CREATE TABLE `CustomerProfilePictures`(
@@ -142,7 +159,8 @@ CREATE TABLE `City` (
    `Name` VARCHAR(100) NOT NULL,
    `Size` DECIMAL,
    `ImagePath` VARCHAR(500) NOT NULL,
-   `IdCustomer` INT NOT NULL REFERENCES `Customer` (Id)
+   `IdCustomer` INT NOT NULL,
+    FOREIGN KEY(`IdCustomer`) REFERENCES `Customer`(Id)
   );
   
   CREATE TABLE `UserCommentaries` (
@@ -150,8 +168,10 @@ CREATE TABLE `City` (
   `Rating` DECIMAL(10,2),
   `Text` longtext,
   `Date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `IdCustomer` INT NOT NULL REFERENCES `Customer` (Id),
-  `IdUser` INT NOT NULL REFERENCES `User` (Id)
+  `IdCustomer` INT NOT NULL,
+  `IdUser` INT NOT NULL,
+   FOREIGN KEY(`IdCustomer`) REFERENCES `Customer`(Id),
+   FOREIGN KEY(`IdUser`) REFERENCES `User`(Id)
   );
   
   CREATE TABLE `CustomerWorkDays`(
@@ -159,14 +179,16 @@ CREATE TABLE `City` (
    `WeekDay` INT NOT NULL,
    `TimeOpen` TIMESTAMP,
    `TimeClose` TIMESTAMP,
-   `IdCustomer` INT NOT NULL REFERENCES `Customer` (Id)
+   `IdCustomer` INT NOT NULL,
+   FOREIGN KEY(`IdCustomer`) REFERENCES `Customer`(Id)
   );
   
   CREATE TABLE `CustomerWorkDaysTimeOff`(
    `Id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
    `TimeStart` TIMESTAMP,
    `TimeEnd` TIMESTAMP,
-   `IdCustomerWorkDays` INT NOT NULL REFERENCES `CustomerWorkDays` (Id)
+   `IdCustomerWorkDays` INT NOT NULL,
+   FOREIGN KEY(`IdCustomerWorkDays`) REFERENCES `CustomerWorkDays`(Id)
   );
   
   CREATE TABLE `Booking`(
@@ -177,13 +199,24 @@ CREATE TABLE `City` (
    `Deleted` BIT DEFAULT 0,
    `Request` VARCHAR(200),
    `CreatedOn` datetime NOT NULL DEFAULT current_timestamp,
-   `IdCustomer` INT NOT NULL REFERENCES `Customer` (Id),
-   `IdUser` INT NOT NULL REFERENCES `User` (Id),
-   `IdComment` INT REFERENCES `UserCommentaries` (Id)
+   `IdCustomer` INT NOT NULL,
+   `IdUser` INT NOT NULL,
+   `IdComment` INT,
+   FOREIGN KEY(`IdCustomer`) REFERENCES `Customer`(Id),
+   FOREIGN KEY(`IdUser`) REFERENCES `User`(Id),
+   FOREIGN KEY(`IdComment`) REFERENCES `UserCommentaries`(Id)
   );
   
   
   CREATE TABLE `UserFavoriteCustomers`(
+   `Id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
    `IdCustomer` INT NOT NULL REFERENCES `Customer` (Id),
    `IdUser` INT NOT NULL REFERENCES `User` (Id)
   );
+  
+  
+
+
+
+  
+ 
