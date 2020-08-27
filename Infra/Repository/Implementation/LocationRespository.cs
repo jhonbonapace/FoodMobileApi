@@ -1,9 +1,7 @@
-﻿using Domain.Entities.Location;
+﻿using Domain.Entities;
 using Infra.Repository.Interface;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Infra.Repository.Implementation
 {
@@ -22,15 +20,15 @@ namespace Infra.Repository.Implementation
                 .OrderBy(p => p.Id).ToList();
         }
 
-        public IEnumerable<State> GetStates(int CountryId)
+        public IEnumerable<State> GetStates(int IdCountry)
         {
-            return _context.State.Where(e => e.CountryId == CountryId)
+            return _context.State.Where(e => e.IdCountry == IdCountry)
                 .OrderBy(p => p.Id).ToList();
         }
 
-        public IEnumerable<City> GetCities(int StateId)
+        public IEnumerable<City> GetCities(int IdState)
         {
-            return _context.City.Where(e => e.StateId == StateId)
+            return _context.City.Where(e => e.IdState == IdState)
                 .OrderBy(p => p.Id).ToList();
         }
     }

@@ -1,20 +1,22 @@
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+
 using Application.DTO;
+using CrossCutting.Extensions;
 using Domain.Entities;
+using Domain.Models;
+using Infra.Repository.Implementation;
 using Infra.Repository.Interface;
-using Serilog;
+using System;
+using System.IO;
 
-namespace Application.Services
+namespace application.services
 {
-    public class CustomerService
+    public class customerservice
     {
-        private readonly ICustomerRepository _customerRepository;
+        private readonly ICustomerRepository _customerrepository;
 
-        public CustomerService(ICustomerRepository customerRepository)
+        public customerservice(CustomerRepository customerrepository)
         {
-            _customerRepository = customerRepository;
+            _customerrepository = customerrepository;
         }
 
         public void Add(CustomerDto customerDto)
@@ -29,15 +31,15 @@ namespace Application.Services
                 }
             }
 
-            _customerRepository.Add(new Customer(
-                customerDto.Name, customerDto.Description, thumbnail, customerDto.Rating, customerDto.Latitude, customerDto.Longitude,
-                customerDto.TimeOpen, customerDto.TimeClose, customerDto.Tags, customerDto.WorkDays, customerDto.DaysOff,
-                customerDto.PaymentMethods, customerDto.Facilities));
+            //_customerrepository.Add(new Customer(
+            //    customerDto.Name, customerDto.Description, thumbnail, customerDto.Rating, customerDto.Latitude, customerDto.Longitude,
+            //    customerDto.TimeOpen, customerDto.TimeClose, customerDto.Tags, customerDto.WorkDays, customerDto.DaysOff,
+            //    customerDto.PaymentMethods, customerDto.Facilities));
         }
 
         public CustomerList List(CustomerListFilterDto customerListFilterDto)
         {
-            return _customerRepository.List(new CustomerFilter
+            return _customerrepository.List(new CustomerFilter
             {
                 Latitude = customerListFilterDto.Latitude,
                 Longitude = customerListFilterDto.Longitude,
@@ -47,26 +49,26 @@ namespace Application.Services
             });
         }
 
-        // public IEnumerable<RestaurantListResultDTO> List(RestaurantListFilterDTO restaurantListFilter)
-        // {
-        //     IEnumerable<Restaurant> restaurants = _restaurantRepository.List(
-        //         restaurantListFilter.Tags,
-        //         restaurantListFilter.Longitude,
-        //         restaurantListFilter.Latitude,
-        //         restaurantListFilter.Distance);
+        //public IEnumerable<restaurantlistresultdto> list(restaurantlistfilterdto restaurantlistfilter)
+        //{
+        //    IEnumerable<Customer> restaurants = _customerrepository.List(
+        //        restaurantlistfilter.tags,
+        //        restaurantlistfilter.longitude,
+        //        restaurantlistfilter.latitude,
+        //        restaurantlistfilter.distance);
 
-        //     IEnumerable<RestaurantListResultDTO> result =
-        //         restaurants.Select(x => new RestaurantListResultDTO
-        //         {
-        //             Name = x.Name,
-        //                 Rating = x.Rating,
-        //                 Tags = x.Tags?.Select(y => y.Name),
-        //                 Thumbnail = x.Thumbnail,
-        //                 TimeOpen = x.TimeOpen,
-        //                 TimeClose = x.TimeClose
-        //         });
+        //    ienumerable<restaurantlistresultdto> result =
+        //        restaurants.Select(x => new CustomerDto
+        //        {
+        //            Name = x.Name,
+        //            rating = x.rating,
+        //            tags = x.tags?.select(y => y.name),
+        //            thumbnail = x.thumbnail,
+        //            timeopen = x.timeopen,
+        //            timeclose = x.timeclose
+        //        });
 
-        //     return result;
-        // }
+        //    return result;
+        //}
     }
 }

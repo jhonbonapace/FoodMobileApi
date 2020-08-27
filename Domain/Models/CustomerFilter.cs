@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Domain.Entities
+namespace Domain.Models
 {
     public class CustomerFilter
     {

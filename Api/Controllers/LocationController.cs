@@ -31,14 +31,14 @@ namespace Api.Controllers
         }
 
 
-      
+
         [HttpGet("Location/Search")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> LocationSearch([FromQuery] string location)
         {
             try
             {
-                var response = await _ILocationService.SearchLocation(location);            
+                var response = await _ILocationService.SearchLocation(location);
 
                 return Ok(response);
             }

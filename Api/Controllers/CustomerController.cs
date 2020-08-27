@@ -1,12 +1,11 @@
-using System;
-using System.Collections.Generic;
+using application.services;
 using Application.Attributes;
 using Application.DTO;
-using Application.Services;
-using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 
 namespace Api.Controllers
 {
@@ -14,17 +13,17 @@ namespace Api.Controllers
     [Route("{controller}")]
     public class CustomerController : ControllerBase
     {
-        private readonly CustomerService _customerService;
+        private readonly customerservice _customerService;
         private readonly ILogger<CustomerController> _logger;
 
-        public CustomerController(ILogger<CustomerController> logger, CustomerService customerService)
+        public CustomerController(ILogger<CustomerController> logger, customerservice customerService)
         {
             _logger = logger;
             _customerService = customerService;
         }
 
         [HttpPost]
-        // [Authorize]
+        [Authorize]
         [Route("Add")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -46,7 +45,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        // [Authorize]
+        [Authorize]
         [Route("List")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -76,29 +75,8 @@ namespace Api.Controllers
         {
             try
             {
-                var customerDto = new CustomerDto
-                {
-                    Tags = new List<Tag>
-                    {
-                        new Tag()
-                    },
-                    WorkDays = new List<WorkDay>
-                    {
-                        new WorkDay()
-                    },
-                    DaysOff = new List<SpecificOff>
-                    {
-                        new SpecificOff()
-                    },
-                    PaymentMethods = new List<PaymentMethod>
-                    {
-                        new PaymentMethod()
-                    },
-                    Facilities = new List<Facilitie>
-                    {
-                        new Facilitie()
-                    }
-                };
+                var customerDto = new CustomerDto();
+              
                 return Ok(customerDto);
             }
             catch (Exception ex)
@@ -110,25 +88,25 @@ namespace Api.Controllers
             }
         }
 
-        // [HttpGet]
-        // [Authorize]
-        // [Route("List")]
-        // [ProducesResponseType(StatusCodes.Status200OK)]
-        // [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        // public IActionResult List([FromQuery] CustomerListFilterDTO CustomerListFilterDto)
-        // {
-        //     try
-        //     {
-        //         IEnumerable<CustomerListResultDTO> result = _CustomerService.List(CustomerListFilterDto);
+        //[HttpGet]
+        //[Authorize]
+        //[Route("List")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public IActionResult List([FromQuery] CustomerListFilterDto CustomerListFilterDto)
+        //{
+        //    try
+        //    {
+        //        IEnumerable<CustomerListFilterDto> result = (IEnumerable<CustomerListFilterDto>)_customerService.List(CustomerListFilterDto);
 
-        //         return Ok(result);
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         _logger.LogError(ex, ex.Message);
+        //        return Ok(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, ex.Message);
 
-        //         return StatusCode(500);
-        //     }
-        // }
+        //        return StatusCode(500);
+        //    }
+        //}
     }
 }

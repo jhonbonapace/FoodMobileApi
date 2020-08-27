@@ -31,5 +31,19 @@ namespace Domain.Enumerators
             [Description("Outro")]
             Other = 7,
         }
+        
+        public enum PaymentMethodType
+        {
+            [Description("Cartão de crédito")]
+            CREDIT = 1,
+            [Description("Cartão de débito")]
+            DEBIT = 2,
+            [Description("Vale alimentação")]
+            MEAL_VOUCHER = 3,
+            [Description("Vale refeição")]
+            FOOD_VOUCHER = 4,
+            [Description("Dinheiro")]
+            CASH = 5
+        }
     }
 }

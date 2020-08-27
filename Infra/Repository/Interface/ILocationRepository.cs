@@ -1,7 +1,5 @@
-﻿using Domain.Entities.Location;
-using System;
+﻿using Domain.Entities;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Infra.Repository.Interface
 {

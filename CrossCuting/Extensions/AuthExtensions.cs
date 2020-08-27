@@ -17,9 +17,8 @@ namespace CrossCuting.Extensions
 
         public void GeneratePassword(ref User user)
         {
-            user.WorkFactor = _appSettings.WorkFactor;
 
-            user.PasswordSalt = BCrypt.Net.BCrypt.GenerateSalt(user.WorkFactor);
+            user.PasswordSalt = BCrypt.Net.BCrypt.GenerateSalt(_appSettings.WorkFactor);
 
             user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.Password, user.PasswordSalt);
         }

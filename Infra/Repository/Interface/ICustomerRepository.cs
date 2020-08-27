@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Domain.Entities;
+using Domain.Models;
 
 namespace Infra.Repository.Interface
 {

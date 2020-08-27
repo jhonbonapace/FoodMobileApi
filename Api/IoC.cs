@@ -1,3 +1,5 @@
+
+using application.services;
 using Application.Interface;
 using Application.Services;
 using Infra.Repository.Implementation;
@@ -10,7 +12,7 @@ namespace Api
     {
         public static IServiceCollection ConfigureDependencies(this IServiceCollection services)
         {
-            services.AddTransient<CustomerService>();
+            //services.AddTransient<customerservice>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
 

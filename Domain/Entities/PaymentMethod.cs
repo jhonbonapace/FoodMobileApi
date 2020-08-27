@@ -1,7 +1,18 @@
+﻿using System.Collections.Generic;
+
 namespace Domain.Entities
 {
-    public class PaymentMethod : Base
+    public partial class Paymentmethod
     {
-        public string Name { get; set; }
+        public Paymentmethod()
+        {
+            Customerpaymentmethods = new HashSet<Customerpaymentmethods>();
+        }
+
+        public int Id { get; set; }
+        public string Description { get; set; }
+        public int Code { get; set; }
+
+        public virtual ICollection<Customerpaymentmethods> Customerpaymentmethods { get; set; }
     }
 }

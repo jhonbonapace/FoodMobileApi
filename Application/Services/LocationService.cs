@@ -3,7 +3,7 @@ using Application.DTO.Mapbox;
 using Application.Interface;
 using CrossCutting.Extensions;
 using CrossCutting.Util;
-using Domain.Entities.Location;
+using Domain.Entities;
 using Domain.Helpers;
 using Infra.Repository;
 using Infra.Repository.Implementation;
@@ -53,7 +53,7 @@ namespace Application.Services
             return model;
         }
 
-        public ResponseModel<IEnumerable<State>> GetStates([FromQuery]int IdCountry)
+        public ResponseModel<IEnumerable<State>> GetStates([FromQuery] int IdCountry)
         {
             ResponseModel<IEnumerable<State>> model = new ResponseModel<IEnumerable<State>>();
 
@@ -72,7 +72,7 @@ namespace Application.Services
 
             return model;
         }
-        public ResponseModel<IEnumerable<City>> GetCities([FromQuery]int IdState)
+        public ResponseModel<IEnumerable<City>> GetCities([FromQuery] int IdState)
         {
             ResponseModel<IEnumerable<City>> model = new ResponseModel<IEnumerable<City>>();
 

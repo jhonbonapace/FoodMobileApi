@@ -1,6 +1,6 @@
 ﻿using Application.DTO;
 using Application.DTO.Mapbox;
-using Domain.Entities.Location;
+using Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

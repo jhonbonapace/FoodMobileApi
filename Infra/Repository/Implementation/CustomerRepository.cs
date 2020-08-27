@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Domain.Entities;
+using Domain.Models;
 using Infra.Repository.Interface;
+using System;
+using System.Linq;
 
 namespace Infra.Repository.Implementation
 {
@@ -17,20 +17,21 @@ namespace Infra.Repository.Implementation
 
         public CustomerList List(CustomerFilter customerFilter)
         {
-            // var query = _context.Customer.OrderByDescending(x => x.Rating);
+            var query = _context.Customer.OrderByDescending(x => x.Name);
 
-            // var (pageCount, results) =
-            //                 _context.Customer
-            //                     .OrderByDescending(x => x.Rating)
-            //                     .GetPaged(customerFilter.CurrentPage, customerFilter.PageSize);
+            var (pageCount, results) =
+                            _context.Customer
+                                .OrderByDescending(x => x.Name)
+                                .GetPaged(customerFilter.CurrentPage, customerFilter.PageSize);
 
-            // var customerList = new CustomerList
-            // {
-            //     Customers = results,
-            //     PageCount = pageCount
-            // };
+            //var customerList = new CustomerList
+            //{
+            //    Customers = results,
+            //    PageCount = pageCount
+            //};
 
-            var result = _context.Customer.OrderByDescending(x => x.Rating).ToList();
+            var result = _context.Customer.OrderByDescending(x => x.Name).ToList();
+
             var customerList = new CustomerList
             {
                 Customers = result,

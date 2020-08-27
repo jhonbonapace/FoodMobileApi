@@ -1,10 +1,9 @@
-using System;
 using Api.Middlewares;
 using Domain.Helpers;
 using Infra.Repository;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -62,7 +61,7 @@ namespace Api
 
             app.UseHttpsRedirection();
 
-            app.UseMiddleware<AuthenticationMiddleware>();
+            app.UseMiddleware<Middlewares.AuthenticationMiddleware>();
 
             app.UseRouting();
 
