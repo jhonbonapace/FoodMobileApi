@@ -208,12 +208,13 @@ CREATE TABLE `City` (
   );
   
   
-  CREATE TABLE `UserFavoriteCustomers`(
+   CREATE TABLE `UserFavoriteCustomers`(
    `Id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-   `IdCustomer` INT NOT NULL REFERENCES `Customer` (Id),
-   `IdUser` INT NOT NULL REFERENCES `User` (Id)
+   `IdCustomer` INT NOT NULL,
+   `IdUser` INT NOT NULL,
+    FOREIGN KEY(`IdCustomer`) REFERENCES `Customer`(Id),
+    FOREIGN KEY(`IdUser`) REFERENCES `User`(Id)
   );
-  
   
 
 
