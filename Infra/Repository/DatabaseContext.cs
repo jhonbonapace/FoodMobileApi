@@ -720,23 +720,18 @@ namespace Infra.Repository
 
             }
             #endregion
+            #region PaymentMethodsSeed
 
-            //#region PaymentMethodsSeed
+            using (StreamReader r = new StreamReader("../Infra/Repository/DatabaseSeed/paymentMethods.json"))
+            {
+                string json = r.ReadToEnd();
+                IEnumerable<Paymentmethod> Paymentmethod = JsonConvert.DeserializeObject<IEnumerable<Paymentmethod>>(json);
+                modelBuilder.Entity<Paymentmethod>().HasData(Paymentmethod);
 
-            //using (StreamReader r = new StreamReader("../Infra/Repository/DatabaseSeed/paymentMethods.json"))
-            //{
-            //    string json = r.ReadToEnd();
-            //    IEnumerable<Paymentmethod> Paymentmethod = JsonConvert.DeserializeObject<IEnumerable<Paymentmethod>>(json);
-            //    modelBuilder.Entity<Paymentmethod>().HasData(Paymentmethod);
-
-            //}
-            //#endregion
-
-
-
+            }
+            #endregion
 
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }
