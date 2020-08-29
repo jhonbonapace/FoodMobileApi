@@ -2,14 +2,13 @@
 
 namespace Domain.Entities
 {
-    public partial class Productcategory
+    public partial class Productcategory: Base
     {
         public Productcategory()
         {
             Product = new HashSet<Product>();
         }
 
-        public int Id { get; set; }
         public int IdCustomer { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

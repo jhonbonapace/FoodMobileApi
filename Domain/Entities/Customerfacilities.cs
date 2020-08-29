@@ -1,8 +1,7 @@
 ﻿namespace Domain.Entities
 {
-    public partial class Customerfacilities
+    public partial class Customerfacilities: Base
     {
-        public int Id { get; set; }
         public int IdFacility { get; set; }
         public int IdCustomer { get; set; }
         public ulong IsActive { get; set; }

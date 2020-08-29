@@ -2,9 +2,8 @@
 
 namespace Domain.Entities
 {
-    public partial class Customerworkdaystimeoff
+    public partial class Customerworkdaystimeoff: Base
     {
-        public int Id { get; set; }
         public DateTime? TimeStart { get; set; }
         public DateTime? TimeEnd { get; set; }
         public int IdCustomerWorkDays { get; set; }

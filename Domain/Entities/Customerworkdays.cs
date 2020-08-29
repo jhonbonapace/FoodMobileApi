@@ -3,14 +3,12 @@ using System.Collections.Generic;
 
 namespace Domain.Entities
 {
-    public partial class Customerworkdays
+    public partial class Customerworkdays: Base
     {
         public Customerworkdays()
         {
             Customerworkdaystimeoff = new HashSet<Customerworkdaystimeoff>();
         }
-
-        public int Id { get; set; }
         public int WeekDay { get; set; }
         public DateTime? TimeOpen { get; set; }
         public DateTime? TimeClose { get; set; }

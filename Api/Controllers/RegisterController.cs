@@ -1,6 +1,8 @@
-﻿using Application.DTO.Auth;
+﻿using Application.DTO;
+using Application.DTO.Auth;
 using Application.Interface;
 using Application.Services;
+using AutoMapper;
 using Domain.Entities;
 using Domain.Helpers;
 using Infra.Repository;
@@ -20,12 +22,14 @@ namespace Api.Controllers
         private readonly IUserService _userService;
         private readonly DatabaseContext _context;
         private readonly IOptions<AppSettings> _appSettings;
+        private IMapper _mapper;
 
-        public RegisterController(ILogger<RegisterController> logger, DatabaseContext context, IOptions<AppSettings> appSettings)
+        public RegisterController(ILogger<RegisterController> logger, DatabaseContext context, IOptions<AppSettings> appSettings, IMapper mapper)
         {
             _logger = logger;
             _context = context;
             _appSettings = appSettings;
+            _mapper = mapper;
 
             _userService = new UserService(_context, _appSettings.Value);
         }
@@ -33,15 +37,19 @@ namespace Api.Controllers
         [HttpPost("Register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Register([FromBody] User user)
+        public IActionResult Register([FromBody] UserDTO userDTO)
         {
             try
             {
+                var remoteIpAddress = HttpContext.Connection.RemoteIpAddress;
+                userDTO.Ip = remoteIpAddress.ToString();
+
+                var user = _mapper.Map<User>(userDTO);
+
                 var response = _userService.Add(user);
 
-
                 if (!response.Response.Success)
-                    return Ok(response);
+                    return BadRequest(response);
                 else
                 {
                     IAuthService authService = new AuthService(_appSettings, _context);
@@ -52,7 +60,6 @@ namespace Api.Controllers
 
                     return Ok(registrationResponse);
                 }
-
             }
             catch (Exception ex)
             {

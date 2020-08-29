@@ -2,14 +2,12 @@
 
 namespace Domain.Entities
 {
-    public partial class Facility
+    public partial class Facility: Base
     {
         public Facility()
         {
             Customerfacilities = new HashSet<Customerfacilities>();
         }
-
-        public int Id { get; set; }
         public string Description { get; set; }
         public int Code { get; set; }
 

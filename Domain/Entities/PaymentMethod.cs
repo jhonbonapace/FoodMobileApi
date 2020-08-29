@@ -3,14 +3,12 @@ using static Domain.Enumerators.Enumerator;
 
 namespace Domain.Entities
 {
-    public partial class Paymentmethod
+    public partial class Paymentmethod: Base
     {
         public Paymentmethod()
         {
             Customerpaymentmethods = new HashSet<Customerpaymentmethods>();
         }
-
-        public int Id { get; set; }
         public string Description { get; set; }
         public int Code { get; set; }
         public PaymentMethodType PaymentMethodType { get; set; }

@@ -3,14 +3,12 @@ using System.Collections.Generic;
 
 namespace Domain.Entities
 {
-    public partial class Usercommentaries
+    public partial class Usercommentaries: Base
     {
         public Usercommentaries()
         {
             Booking = new HashSet<Booking>();
         }
-
-        public int Id { get; set; }
         public decimal? Rating { get; set; }
         public string Text { get; set; }
         public DateTime Date { get; set; }

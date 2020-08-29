@@ -2,9 +2,8 @@
 
 namespace Domain.Entities
 {
-    public partial class Booking
+    public partial class Booking: Base
     {
-        public int Id { get; set; }
         public string ReservationCode { get; set; }
         public DateTime Date { get; set; }
         public int? GuestQuantity { get; set; }

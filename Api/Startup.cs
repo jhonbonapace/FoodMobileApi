@@ -1,4 +1,5 @@
 using Api.Middlewares;
+using AutoMapper;
 using Domain.Helpers;
 using Infra.Repository;
 using Microsoft.AspNetCore.Authentication;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Core;
+using System;
 
 namespace Api
 {
@@ -31,13 +33,12 @@ namespace Api
             services.Configure<DatabaseSettings>(Configuration.GetSection("ConnectionStrings"));
 
             services.AddDbContext<DatabaseContext>();
-            // services.AddDbContextPool<DatabaseContext>(
-            //     options => options.UseMySql(Configuration.GetConnectionString("SqlDatabase")
-            // ));
 
             services.ConfigureDependencies();
 
             services.AddCors();
+
+            services.AddMemoryCache();
 
             services.AddControllers().AddJsonOptions(o =>
             {
@@ -48,6 +49,7 @@ namespace Api
             Logger logger = new LoggerConfiguration()
                 .WriteTo.Console()
                 .CreateLogger();
+
             services.AddSingleton(logger);
         }
 

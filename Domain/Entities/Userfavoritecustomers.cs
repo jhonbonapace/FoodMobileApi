@@ -1,8 +1,7 @@
 ﻿namespace Domain.Entities
 {
-    public partial class Userfavoritecustomers
+    public partial class Userfavoritecustomers: Base
     {
-        public int Id { get; set; }
         public int IdCustomer { get; set; }
         public int IdUser { get; set; }
 

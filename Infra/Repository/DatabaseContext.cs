@@ -81,7 +81,7 @@ namespace Infra.Repository
                     .HasColumnName("Name_PT")
                     .HasColumnType("varchar(200)")
                     .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");       
+                    .HasCollation("utf8mb4_0900_ai_ci");
             });
 
             modelBuilder.Entity<State>(entity =>
@@ -592,9 +592,11 @@ namespace Infra.Repository
                     .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.Gender)
-                    .HasColumnType("char(1)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                .HasConversion<int>();
+
+                entity.Property(e => e.UserType)
+                .IsRequired()
+                .HasConversion<int>();
 
                 entity.Property(e => e.Identity)
                     .HasColumnType("varchar(14)")
@@ -626,6 +628,7 @@ namespace Infra.Repository
                     .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.Telephone)
+                    .IsRequired()
                     .HasColumnType("varchar(20)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");

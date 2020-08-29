@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using static Domain.Enumerators.Enumerator;
 
 namespace Domain.Entities
 {
@@ -21,17 +22,17 @@ namespace Domain.Entities
         public string Telephone { get; set; }
         public DateTime? BirthDate { get; set; }
 
-        public string Gender { get; set; }
+        public Gender? Gender { get; set; }
         public byte[] Thumbnail { get; set; }
-        public int UserType { get; set; }
+        public UserType UserType { get; set; }
         public int FailedAttempts { get; set; }
         [NotMapped]
         public string Password { get; set; }
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
-        public DateTime? CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
-        public ulong? Deleted { get; set; }
+        public bool? Deleted { get; set; }
         public string Ip { get; set; }
 
         public virtual ICollection<Booking> Booking { get; set; }

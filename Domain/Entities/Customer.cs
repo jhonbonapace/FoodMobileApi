@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Domain.Entities
 {
-    public partial class Customer
+    public partial class Customer: Base
     {
 
         public Customer()
@@ -19,8 +19,6 @@ namespace Domain.Entities
             Usercommentaries = new HashSet<Usercommentaries>();
             Userfavoritecustomers = new HashSet<Userfavoritecustomers>();
         }
-
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string BookingNote { get; set; }

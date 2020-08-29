@@ -9,10 +9,12 @@ namespace Domain.Enumerators
     {
         public enum UserType
         {
-            [Description("Personal")]
+            [Description("Pessoal")]
             Personal = 1,
-            [Description("Establishment")]
+            [Description("Estabelecimento")]
             Establishment = 2,
+            [Description("Administrador")]
+            Administrator = 3,
         }
         public enum ContactType
         {
@@ -42,6 +44,16 @@ namespace Domain.Enumerators
             MEAL_VOUCHER = 3,
             [Description("Vale refeição")]
             FOOD_VOUCHER = 4,        
+        }
+
+        public enum Gender
+        {
+            [Description("Masculino")]
+            Male = 1,
+            [Description("Feminino")]
+            Famale = 2,
+            [Description("Other")]
+            Other = 3,
         }
     }
 }

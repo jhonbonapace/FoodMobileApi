@@ -2,14 +2,12 @@
 
 namespace Domain.Entities
 {
-    public partial class Address
+    public partial class Address: Base
     {
         public Address()
         {
             Customer = new HashSet<Customer>();
         }
-
-        public int Id { get; set; }
         public string Street { get; set; }
         public string Number { get; set; }
         public string District { get; set; }

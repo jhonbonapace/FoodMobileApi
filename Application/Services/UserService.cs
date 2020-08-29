@@ -143,9 +143,9 @@ namespace Application.Services
 
                     authExtensions.GeneratePassword(ref user);
 
-                    _userRepository.Add(user);
+                   var response =  _userRepository.Add(user);
 
-                    model.Response.Success = true;
+                    model.Response.Success = response;
                 }
                 else
                 {

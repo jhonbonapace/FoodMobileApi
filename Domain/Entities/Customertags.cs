@@ -1,8 +1,7 @@
 ﻿namespace Domain.Entities
 {
-    public partial class Customertags
+    public partial class Customertags: Base
     {
-        public int Id { get; set; }
         public int IdTag { get; set; }
         public int IdCustomer { get; set; }
 

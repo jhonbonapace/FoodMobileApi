@@ -2,15 +2,13 @@
 
 namespace Domain.Entities
 {
-    public partial class State
+    public partial class State: Base
     {
         public State()
         {
             Address = new HashSet<Address>();
             City = new HashSet<City>();
         }
-
-        public int Id { get; set; }
         public string Name { get; set; }
         public int IdCountry { get; set; }
         public string Ibgecode { get; set; }

@@ -2,14 +2,12 @@
 
 namespace Domain.Entities
 {
-    public partial class Tags
+    public partial class Tags: Base
     {
         public Tags()
         {
             Customertags = new HashSet<Customertags>();
         }
-
-        public int Id { get; set; }
         public string Description { get; set; }
         public int Code { get; set; }
 
