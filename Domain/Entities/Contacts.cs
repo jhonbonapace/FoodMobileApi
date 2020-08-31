@@ -1,11 +1,11 @@
 ﻿namespace Domain.Entities
 {
-    public partial class Contacts: Base
+    public partial class Contacts : Base
     {
-        public int IdCustomer { get; set; }
         public int ContactyType { get; set; }
         public string Description { get; set; }
 
-        public virtual Customer IdCustomerNavigation { get; set; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
     }
 }

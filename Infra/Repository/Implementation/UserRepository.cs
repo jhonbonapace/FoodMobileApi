@@ -17,76 +17,82 @@ namespace Infra.Repository.Implementation
 
         public User Get(int Id)
         {
-            return _context.User.Where(
-                     p => p.Id == Id).FirstOrDefault();
+            return default(User);
+            // return _context.User.Where(
+            //          p => p.Id == Id).FirstOrDefault();
         }
         public User Get(string Email)
         {
-            return _context.User.Where(
-                     p => p.Email == Email).FirstOrDefault();
+            return default(User);
+            // return _context.User.Where(
+            //          p => p.Email == Email).FirstOrDefault();
         }
 
         public IEnumerable<User> List()
         {
-            return _context.User
-                .OrderBy(p => p.Id).ToList();
+            return default(IEnumerable<User>);
+            // return _context.User
+            //     .OrderBy(p => p.Id).ToList();
         }
 
         public bool Add(User user)
         {
-            try
-            {
-                _context.User.Add(user);
-                _context.SaveChanges();
+            return default(bool);
+            // try
+            // {
+            //     _context.User.Add(user);
+            //     _context.SaveChanges();
 
-                return true;
-            }
-            catch (Exception)
-            {
+            //     return true;
+            // }
+            // catch (Exception)
+            // {
 
-                return false;
-            }
+            //     return false;
+            // }
         }
 
         public bool Update(User user)
         {
-            try
-            {
-                User selectedUser = _context.User.Where(
-                      p => p.Id == user.Id).FirstOrDefault();
+            return default(bool);
+            // try
+            // {
+            //     User selectedUser = _context.User.Where(
+            //           p => p.Id == user.Id).FirstOrDefault();
 
-                selectedUser.Name = user.Name;
-                selectedUser.Identity = user.Identity;
-                selectedUser.Telephone = user.Telephone;
-                selectedUser.BirthDate = user.BirthDate;
-                _context.SaveChanges();
+            //     selectedUser.Name = user.Name;
+            //     selectedUser.Identity = user.Identity;
+            //     selectedUser.Telephone = user.Telephone;
+            //     selectedUser.BirthDate = user.BirthDate;
+            //     _context.SaveChanges();
 
-            }
-            catch (Exception)
-            {
+            // }
+            // catch (Exception)
+            // {
 
-                return false;
-            }
+            //     return false;
+            // }
 
-            return true;
+            // return true;
         }
 
         public bool Delete(int Id)
         {
-            try
-            {
-                User produto = Get(Id);
+            return default(bool);
+            // try
+            // {
+            //     User produto = Get(Id);
 
-                _context.User.Remove(produto);
-                _context.SaveChanges();
-            }
-            catch (Exception)
-            {
+            //     _context.User.Remove(produto);
+            //     _context.SaveChanges();
+            // }
+            // catch (Exception)
+            // {
 
-                return false;
-            }
+            //     return false;
+            // }
 
-            return true;
+            // return true;
         }
     }
 }

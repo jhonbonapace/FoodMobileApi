@@ -8,38 +8,35 @@ using Infra.Repository.Interface;
 using System;
 using System.IO;
 
-namespace application.services
+namespace Application.Services
 {
-    public class customerservice
+    public class CustomerService
     {
-        private readonly ICustomerRepository _customerrepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public customerservice(CustomerRepository customerrepository)
+        public CustomerService(ICustomerRepository customerRepository)
         {
-            _customerrepository = customerrepository;
+            _customerRepository = customerRepository;
         }
 
-        public void Add(CustomerDto customerDto)
+        public void Add(Customer customer)
         {
-            byte[] thumbnail = null;
-            if (customerDto.Thumbnail.Length > 0)
-            {
-                using (var stream = new MemoryStream())
-                {
-                    customerDto.Thumbnail.CopyTo(stream);
-                    thumbnail = stream.ToArray();
-                }
-            }
+            // byte[] thumbnail = null;
+            // if (customer.Thumbnail.Length > 0)
+            // {
+            //     using (var stream = new MemoryStream())
+            //     {
+            //         customer.Thumbnail.CopyTo(stream);
+            //         thumbnail = stream.ToArray();
+            //     }
+            // }
 
-            //_customerrepository.Add(new Customer(
-            //    customerDto.Name, customerDto.Description, thumbnail, customerDto.Rating, customerDto.Latitude, customerDto.Longitude,
-            //    customerDto.TimeOpen, customerDto.TimeClose, customerDto.Tags, customerDto.WorkDays, customerDto.DaysOff,
-            //    customerDto.PaymentMethods, customerDto.Facilities));
+            _customerRepository.Add(customer);
         }
 
         public CustomerList List(CustomerListFilterDto customerListFilterDto)
         {
-            return _customerrepository.List(new CustomerFilter
+            return _customerRepository.List(new CustomerFilter
             {
                 Latitude = customerListFilterDto.Latitude,
                 Longitude = customerListFilterDto.Longitude,

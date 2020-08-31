@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities
 {
-    public partial class Customerprofilepictures: Base
+    public partial class CustomerProfilePictures : Base
     {
         public string Name { get; set; }
         public decimal? Size { get; set; }

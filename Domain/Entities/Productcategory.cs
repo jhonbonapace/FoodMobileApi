@@ -2,9 +2,9 @@
 
 namespace Domain.Entities
 {
-    public partial class Productcategory: Base
+    public partial class ProductCategory : Base
     {
-        public Productcategory()
+        public ProductCategory()
         {
             Product = new HashSet<Product>();
         }

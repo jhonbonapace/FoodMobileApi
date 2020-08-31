@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Domain.Entities
 {
-    public partial class Customerworkdays: Base
+    public partial class CustomerWorkDays : Base
     {
-        public Customerworkdays()
+        public CustomerWorkDays()
         {
-            Customerworkdaystimeoff = new HashSet<Customerworkdaystimeoff>();
+            CustomerWorkDaysTimeOff = new HashSet<CustomerWorkDaysTimeOff>();
         }
         public int WeekDay { get; set; }
         public DateTime? TimeOpen { get; set; }
@@ -15,6 +15,6 @@ namespace Domain.Entities
         public int IdCustomer { get; set; }
 
         public virtual Customer IdCustomerNavigation { get; set; }
-        public virtual ICollection<Customerworkdaystimeoff> Customerworkdaystimeoff { get; set; }
+        public virtual ICollection<CustomerWorkDaysTimeOff> CustomerWorkDaysTimeOff { get; set; }
     }
 }

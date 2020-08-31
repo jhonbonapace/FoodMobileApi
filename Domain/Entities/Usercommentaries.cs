@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Domain.Entities
 {
-    public partial class Usercommentaries: Base
+    public partial class UserCommentaries : Base
     {
-        public Usercommentaries()
+        public UserCommentaries()
         {
             Booking = new HashSet<Booking>();
         }

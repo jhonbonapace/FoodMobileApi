@@ -30,8 +30,8 @@ namespace Application.DTO
         public string Ip { get; set; }
         public virtual ICollection<Booking> Booking { get; set; }
         public virtual ICollection<Customer> Customer { get; set; }
-        public virtual ICollection<Usercommentaries> Usercommentaries { get; set; }
-        public virtual ICollection<Userfavoritecustomers> Userfavoritecustomers { get; set; }
+        public virtual ICollection<UserCommentaries> UserCommentaries { get; set; }
+        public virtual ICollection<UserFavoriteCustomers> UserFavoriteCustomers { get; set; }
 
 
     }
@@ -40,13 +40,13 @@ namespace Application.DTO
     {
         public UserDTOValidator()
         {
-             RuleFor(x => x.Name)
-            .NotEmpty().WithMessage("O campo nome deve ser informado")
-            .Length(3, 200).WithMessage("O campo nome deve ter entre 3 e 150 caracteres");
+            RuleFor(x => x.Name)
+           .NotEmpty().WithMessage("O campo nome deve ser informado")
+           .Length(3, 200).WithMessage("O campo nome deve ter entre 3 e 150 caracteres");
 
-             RuleFor(c => c.Email)
-            .NotEmpty().WithMessage("O campo e-mail deve ser informado")
-            .EmailAddress().WithMessage("E-mail inválido");
+            RuleFor(c => c.Email)
+           .NotEmpty().WithMessage("O campo e-mail deve ser informado")
+           .EmailAddress().WithMessage("E-mail inválido");
 
             RuleFor(c => c.Telephone)
             .NotEmpty().WithMessage("O campo telefone deve ser informado");

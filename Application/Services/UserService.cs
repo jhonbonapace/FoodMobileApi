@@ -143,7 +143,7 @@ namespace Application.Services
 
                     authExtensions.GeneratePassword(ref user);
 
-                   var response =  _userRepository.Add(user);
+                    var response = _userRepository.Add(user);
 
                     model.Response.Success = response;
                 }

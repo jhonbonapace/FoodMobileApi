@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Application.DTO
 {
-    public class CustomerDto: Base
+    public class CustomerDto : Base
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -24,13 +24,13 @@ namespace Application.DTO
         public virtual User IdUserNavigation { get; set; }
         public virtual ICollection<Booking> Booking { get; set; }
         public virtual ICollection<Contacts> Contacts { get; set; }
-        public virtual ICollection<Customerfacilities> Customerfacilities { get; set; }
-        public virtual ICollection<Customerpaymentmethods> Customerpaymentmethods { get; set; }
-        public virtual ICollection<Customerprofilepictures> Customerprofilepictures { get; set; }
-        public virtual ICollection<Customertags> Customertags { get; set; }
-        public virtual ICollection<Customerworkdays> Customerworkdays { get; set; }
-        public virtual ICollection<Productcategory> Productcategory { get; set; }
-        public virtual ICollection<Usercommentaries> Usercommentaries { get; set; }
-        public virtual ICollection<Userfavoritecustomers> Userfavoritecustomers { get; set; }
+        public virtual ICollection<CustomerFacilities> CustomerFacilities { get; set; }
+        public virtual ICollection<CustomerPaymentMethods> CustomerPaymentMethods { get; set; }
+        public virtual ICollection<CustomerProfilePictures> CustomerProfilePictures { get; set; }
+        public virtual ICollection<CustomerTags> CustomerTags { get; set; }
+        public virtual ICollection<CustomerWorkDays> CustomerWorkDays { get; set; }
+        public virtual ICollection<ProductCategory> ProductCategory { get; set; }
+        public virtual ICollection<UserCommentaries> UserCommentaries { get; set; }
+        public virtual ICollection<UserFavoriteCustomers> UserFavoriteCustomers { get; set; }
     }
 }

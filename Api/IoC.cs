@@ -1,5 +1,3 @@
-
-using application.services;
 using Application.DTO;
 using Application.Interface;
 using Application.Services;
@@ -7,9 +5,7 @@ using AutoMapper;
 using FluentValidation.AspNetCore;
 using Infra.Repository.Implementation;
 using Infra.Repository.Interface;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace Api
 {
@@ -17,7 +13,7 @@ namespace Api
     {
         public static IServiceCollection ConfigureDependencies(this IServiceCollection services)
         {
-            //services.AddTransient<customerservice>();
+            services.AddTransient<CustomerService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
 
@@ -40,7 +36,6 @@ namespace Api
             fv.RegisterValidatorsFromAssemblyContaining<UserDTOValidator>()
             );
             #endregion
-
 
             return services;
         }

@@ -11,8 +11,8 @@ namespace Domain.Entities
         {
             Booking = new HashSet<Booking>();
             Customer = new HashSet<Customer>();
-            Usercommentaries = new HashSet<Usercommentaries>();
-            Userfavoritecustomers = new HashSet<Userfavoritecustomers>();
+            UserCommentaries = new HashSet<UserCommentaries>();
+            UserFavoriteCustomers = new HashSet<UserFavoriteCustomers>();
         }
 
         public int Id { get; set; }
@@ -37,7 +37,7 @@ namespace Domain.Entities
 
         public virtual ICollection<Booking> Booking { get; set; }
         public virtual ICollection<Customer> Customer { get; set; }
-        public virtual ICollection<Usercommentaries> Usercommentaries { get; set; }
-        public virtual ICollection<Userfavoritecustomers> Userfavoritecustomers { get; set; }
+        public virtual ICollection<UserCommentaries> UserCommentaries { get; set; }
+        public virtual ICollection<UserFavoriteCustomers> UserFavoriteCustomers { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities
 {
-    public partial class Product: Base
+    public partial class Product : Base
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -10,6 +10,6 @@
         public string ImagePath { get; set; }
         public ulong? Deleted { get; set; }
 
-        public virtual Productcategory IdProductCategoryNavigation { get; set; }
+        public virtual ProductCategory IdProductCategoryNavigation { get; set; }
     }
 }

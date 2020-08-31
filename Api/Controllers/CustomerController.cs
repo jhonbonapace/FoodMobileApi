@@ -1,6 +1,8 @@
-using application.services;
 using Application.Attributes;
 using Application.DTO;
+using Application.Services;
+using AutoMapper;
+using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,17 +15,19 @@ namespace Api.Controllers
     [Route("{controller}")]
     public class CustomerController : ControllerBase
     {
-        private readonly customerservice _customerService;
+        private readonly CustomerService _customerService;
         private readonly ILogger<CustomerController> _logger;
+        private readonly IMapper _mapper;
 
-        public CustomerController(ILogger<CustomerController> logger, customerservice customerService)
+        public CustomerController(ILogger<CustomerController> logger, CustomerService customerService, IMapper mapper)
         {
             _logger = logger;
             _customerService = customerService;
+            _mapper = mapper;
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         [Route("Add")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -31,7 +35,7 @@ namespace Api.Controllers
         {
             try
             {
-                _customerService.Add(customerDto);
+                _customerService.Add(_mapper.Map<Customer>(customerDto));
 
                 return Ok();
             }
@@ -76,7 +80,7 @@ namespace Api.Controllers
             try
             {
                 var customerDto = new CustomerDto();
-              
+
                 return Ok(customerDto);
             }
             catch (Exception ex)
