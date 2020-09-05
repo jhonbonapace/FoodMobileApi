@@ -42,7 +42,6 @@ namespace Application.Services
                 model.Response.Data = _locationRepository.GetCountries();
 
                 model.Response.Success = true;
-
             }
             catch (Exception ex)
             {
@@ -81,7 +80,6 @@ namespace Application.Services
                 model.Response.Data = _locationRepository.GetCities(IdState);
 
                 model.Response.Success = true;
-
             }
             catch (Exception ex)
             {

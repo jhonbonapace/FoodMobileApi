@@ -5,22 +5,22 @@ using System.Linq;
 
 namespace Infra.Repository.Implementation
 {
-    public class FavoriteCustomersRepository : IFavoriteCustomersRepository
+    public class FavoriteRepository : IFavoriteRepository
     {
         private DatabaseContext _context;
 
-        public FavoriteCustomersRepository(DatabaseContext context)
+        public FavoriteRepository(DatabaseContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<UserFavoriteCustomers> List(int IdUser)
+        public IEnumerable<UserFavoriteCustomer> List(int IdUser)
         {
             return _context.UserFavoriteCustomers.Where(e => e.UserId == IdUser)
             .OrderBy(p => p.Id).ToList();
         }
 
-        public bool Add(UserFavoriteCustomers favoriteCustomers)
+        public bool Add(UserFavoriteCustomer favoriteCustomers)
         {
             try
             {

@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities
 {
-    public  class UserFavoriteCustomers : Base
+    public  class UserFavoriteCustomer : Base
     {
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }

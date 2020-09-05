@@ -30,7 +30,7 @@ namespace Application.DTO
         public virtual ICollection<Booking> Booking { get; set; }
         public virtual ICollection<Customer> Customer { get; set; }
         public virtual ICollection<UserCommentaries> UserCommentaries { get; set; }
-        public virtual ICollection<UserFavoriteCustomers> UserFavoriteCustomers { get; set; }
+        public virtual ICollection<UserFavoriteCustomer> UserFavoriteCustomers { get; set; }
 
 
     }

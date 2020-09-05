@@ -1,17 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{25B6509C-1CFC-4276-A5C0-BD84D884C890}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{25B6509C-1CFC-4276-A5C0-BD84D884C890}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{9556BB6E-E181-4920-BD6D-C4972FA63394}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{9556BB6E-E181-4920-BD6D-C4972FA63394}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossCuting", "CrossCuting\CrossCuting.csproj", "{6EB27FFB-86EA-4218-846B-5D10D798551E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossCuting", "CrossCuting\CrossCuting.csproj", "{6EB27FFB-86EA-4218-846B-5D10D798551E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{A8F2E8B3-1FAA-473C-9506-065195779F00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{A8F2E8B3-1FAA-473C-9506-065195779F00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra", "Infra\Infra.csproj", "{D6CD6891-B31E-440E-9A29-086D3EE78E5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra", "Infra\Infra.csproj", "{D6CD6891-B31E-440E-9A29-086D3EE78E5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{25B6509C-1CFC-4276-A5C0-BD84D884C890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -86,5 +83,11 @@ Global
 		{D6CD6891-B31E-440E-9A29-086D3EE78E5B}.Release|x64.Build.0 = Release|Any CPU
 		{D6CD6891-B31E-440E-9A29-086D3EE78E5B}.Release|x86.ActiveCfg = Release|Any CPU
 		{D6CD6891-B31E-440E-9A29-086D3EE78E5B}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D76A26ED-2014-4A82-AAB5-95CA11ECFEA3}
 	EndGlobalSection
 EndGlobal

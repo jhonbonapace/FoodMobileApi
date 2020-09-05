@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Interface
 {
-    public interface IFavoriteCustomersService
+    public interface IFavoriteService
     {
         ResponseModel<IEnumerable<UserFavoriteCustomerDTO>> List(int IdUser);
         ResponseModel<bool> Add(UserFavoriteCustomerDTO favoriteItem);

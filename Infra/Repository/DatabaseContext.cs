@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Infra.Repository
 {
@@ -53,7 +53,7 @@ namespace Infra.Repository
         // public virtual DbSet<Tags> Tags { get; set; }
         public virtual DbSet<User> User { get; set; }
         // public virtual DbSet<UserCommentaries> UserCommentaries { get; set; }
-        public virtual DbSet<UserFavoriteCustomers> UserFavoriteCustomers { get; set; }
+        public virtual DbSet<UserFavoriteCustomer> UserFavoriteCustomers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

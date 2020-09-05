@@ -12,24 +12,25 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("{controller}")]
-    public class FavoriteCustomersController : ControllerBase
+    public class FavoriteController : ControllerBase
     {
         private IMapper _mapper;
         private readonly ILogger<LocationController> _logger;
-        private readonly IFavoriteCustomersService _service;
+        private readonly IFavoriteService _service;
         private readonly DatabaseContext _context;
 
-        public FavoriteCustomersController(ILogger<LocationController> logger, DatabaseContext context, IMapper mapper)
+        public FavoriteController(ILogger<LocationController> logger, DatabaseContext context, IMapper mapper)
         {
             _mapper = mapper;
             _logger = logger;
             _context = context;
-            _service = new FavoriteCustomersService(_context, _mapper);
+            _service = new FavoriteService(_context, _mapper);
         }
 
         [HttpPost("Favorite/Add")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult AddFavoriteCustomer([FromBody] UserFavoriteCustomerDTO item)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult Add([FromBody] UserFavoriteCustomerDTO item)
         {
             try
             {
@@ -50,7 +51,7 @@ namespace Api.Controllers
 
         [HttpGet("Favorite/List")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult ListFavoriteCustomers()
+        public IActionResult List()
         {
             try
             {
@@ -70,7 +71,7 @@ namespace Api.Controllers
 
         [HttpDelete("Favorite/Delete")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult DeleteFavoriteCustomer([FromQuery] int Id)
+        public IActionResult Delete([FromQuery] int Id)
         {
             try
             {

@@ -31,6 +31,6 @@ namespace Application.DTO
         //public virtual ICollection<CustomerWorkDays> CustomerWorkDays { get; set; }
         public virtual ICollection<ProductCategory> ProductCategory { get; set; }
         public virtual ICollection<UserCommentaries> UserCommentaries { get; set; }
-        public virtual ICollection<UserFavoriteCustomers> UserFavoriteCustomers { get; set; }
+        public virtual ICollection<UserFavoriteCustomer> UserFavoriteCustomers { get; set; }
     }
 }

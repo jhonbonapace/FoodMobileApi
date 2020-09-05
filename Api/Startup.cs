@@ -26,11 +26,12 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            #region Configure Application Settings
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.Configure<MapBoxSettings>(Configuration.GetSection("MapBoxSettings"));
-
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.Configure<DatabaseSettings>(Configuration.GetSection("ConnectionStrings"));
+            #endregion
 
             services.AddDbContext<DatabaseContext>();
 

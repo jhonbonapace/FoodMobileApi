@@ -1,12 +1,8 @@
 
 using Application.DTO;
-using CrossCutting.Extensions;
 using Domain.Entities;
 using Domain.Models;
-using Infra.Repository.Implementation;
 using Infra.Repository.Interface;
-using System;
-using System.IO;
 
 namespace Application.Services
 {

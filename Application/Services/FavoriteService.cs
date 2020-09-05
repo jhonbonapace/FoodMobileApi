@@ -3,7 +3,6 @@ using Application.Interface;
 using AutoMapper;
 using CrossCutting.Extensions;
 using Domain.Entities;
-using Domain.Helpers;
 using Infra.Repository;
 using Infra.Repository.Implementation;
 using Infra.Repository.Interface;
@@ -12,18 +11,18 @@ using System.Collections.Generic;
 
 namespace Application.Services
 {
-    public class FavoriteCustomersService : IFavoriteCustomersService
+    public class FavoriteService : IFavoriteService
     {
         IMapper _mapper;
         Serilog.Core.Logger _logger;
-        private IFavoriteCustomersRepository _repository;
+        private IFavoriteRepository _repository;
 
-        public FavoriteCustomersService(DatabaseContext context, IMapper mapper)
+        public FavoriteService(DatabaseContext context, IMapper mapper)
         {
             _mapper = mapper;
             LoggerExtension logger = new LoggerExtension();
             _logger = logger.CreateLogger();
-            _repository = new FavoriteCustomersRepository(context);
+            _repository = new FavoriteRepository(context);
         }
 
         public ResponseModel<IEnumerable<UserFavoriteCustomerDTO>> List(int IdUser)
@@ -32,7 +31,7 @@ namespace Application.Services
 
             try
             {
-                IEnumerable<UserFavoriteCustomers> itens = _repository.List(IdUser);
+                IEnumerable<UserFavoriteCustomer> itens = _repository.List(IdUser);
 
                 model.Response.Data = _mapper.Map<IEnumerable<UserFavoriteCustomerDTO>>(itens);
 
@@ -54,7 +53,7 @@ namespace Application.Services
 
             try
             {
-                var item = _mapper.Map<UserFavoriteCustomers>(favoriteItem);
+                var item = _mapper.Map<UserFavoriteCustomer>(favoriteItem);
 
                 model.Response.Data = _repository.Add(item);
 

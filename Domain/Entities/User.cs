@@ -40,6 +40,6 @@ namespace Domain.Entities
         public UserSettings UserSettings { get; set; }
         public ICollection<Booking> Booking { get; set; }
         public ICollection<UserCommentaries> UserCommentaries { get; set; }
-        public ICollection<UserFavoriteCustomers> UserFavoriteCustomers { get; set; }
+        public ICollection<UserFavoriteCustomer> UserFavoriteCustomers { get; set; }
     }
 }

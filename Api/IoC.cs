@@ -16,15 +16,16 @@ namespace Api
             services.AddTransient<CustomerService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
 
             #region Automapper
-            var _automapper = new AutoMapper.MapperConfiguration(cfg =>
+            var _automapper = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Application.DTO.CustomerDto, Domain.Entities.Customer>();
-                cfg.CreateMap<Application.DTO.UserDTO, Domain.Entities.User>();
-                cfg.CreateMap<Application.DTO.UserFavoriteCustomerDTO, Domain.Entities.UserFavoriteCustomers>();           
+                cfg.CreateMap<CustomerDto, Domain.Entities.Customer>();
+                cfg.CreateMap<UserDTO, Domain.Entities.User>();
+                cfg.CreateMap<UserFavoriteCustomerDTO, Domain.Entities.UserFavoriteCustomer>();
             });
             IMapper mapper = _automapper.CreateMapper();
 
@@ -34,7 +35,10 @@ namespace Api
             #region Fluent Validator
             services.AddMvc()
             .AddFluentValidation(fv =>
-            fv.RegisterValidatorsFromAssemblyContaining<UserDTOValidator>()
+            {
+                fv.RegisterValidatorsFromAssemblyContaining<UserDTOValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<UserFavoriteCustomerDTOValidator>();
+            }
             );
             #endregion
 

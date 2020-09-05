@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Application.DTO;
+﻿using Application.DTO;
+using Application.DTO.Email;
 using Application.Interface;
 using AutoMapper;
 using CrossCuting.Extensions;
@@ -10,6 +9,8 @@ using Domain.Helpers;
 using Infra.Repository;
 using Infra.Repository.Implementation;
 using Infra.Repository.Interface;
+using System;
+using System.Collections.Generic;
 
 namespace Application.Services
 {
