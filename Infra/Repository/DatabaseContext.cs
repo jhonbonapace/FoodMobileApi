@@ -51,9 +51,9 @@ namespace Infra.Repository
         // public virtual DbSet<ProductCategory> ProductCategory { get; set; }
 
         // public virtual DbSet<Tags> Tags { get; set; }
-        // public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<User> User { get; set; }
         // public virtual DbSet<UserCommentaries> UserCommentaries { get; set; }
-        // public virtual DbSet<UserFavoriteCustomers> UserFavoriteCustomers { get; set; }
+        public virtual DbSet<UserFavoriteCustomers> UserFavoriteCustomers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

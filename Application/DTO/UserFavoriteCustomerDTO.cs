@@ -1,6 +1,8 @@
-﻿namespace Domain.Entities
+﻿using Domain.Entities;
+
+namespace Application.DTO
 {
-    public  class UserFavoriteCustomers : Base
+    public class UserFavoriteCustomerDTO : Base
     {
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
