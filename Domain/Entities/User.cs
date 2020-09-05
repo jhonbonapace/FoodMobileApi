@@ -37,6 +37,7 @@ namespace Domain.Entities
         [Column(TypeName = "varchar(50)")]
         public string Ip { get; set; }
         public UserType UserType { get; set; }
+        public UserSettings UserSettings { get; set; }
         public ICollection<Booking> Booking { get; set; }
         public ICollection<UserCommentaries> UserCommentaries { get; set; }
         public ICollection<UserFavoriteCustomers> UserFavoriteCustomers { get; set; }

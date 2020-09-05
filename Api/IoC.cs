@@ -24,6 +24,7 @@ namespace Api
             {
                 cfg.CreateMap<Application.DTO.CustomerDto, Domain.Entities.Customer>();
                 cfg.CreateMap<Application.DTO.UserDTO, Domain.Entities.User>();
+                cfg.CreateMap<Application.DTO.UserFavoriteCustomerDTO, Domain.Entities.UserFavoriteCustomers>();           
             });
             IMapper mapper = _automapper.CreateMapper();
 

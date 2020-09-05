@@ -26,6 +26,7 @@ namespace Application.DTO
         public DateTime? UpdateDate { get; set; }
         public bool? Deleted { get; set; }
         public string Ip { get; set; }
+        public UserSettings UserSettings { get; set; }
         public virtual ICollection<Booking> Booking { get; set; }
         public virtual ICollection<Customer> Customer { get; set; }
         public virtual ICollection<UserCommentaries> UserCommentaries { get; set; }
