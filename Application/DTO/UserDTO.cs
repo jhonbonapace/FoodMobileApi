@@ -1,10 +1,8 @@
 ﻿using Domain.Entities;
 using FluentValidation;
-using MongoDB.Driver;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using static Domain.Enumerators.Enumerator;
 
 namespace Application.DTO

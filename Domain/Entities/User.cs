@@ -13,7 +13,7 @@ namespace Domain.Entities
         [Column(TypeName = "varchar(100)")]
         public string Email { get; set; }
 
-        [Column(TypeName = "varchar(11)")]
+        [Column(TypeName = "varchar(14)")]
         public string Identity { get; set; }
 
         [Column(TypeName = "varchar(11)")]
@@ -24,8 +24,6 @@ namespace Domain.Entities
         public byte[] Thumbnail { get; set; }
 
         public int FailedAttempts { get; set; }
-        [NotMapped]
-        public string Password { get; set; }
 
         [Column(TypeName = "varchar(50)")]
         public string PasswordHash { get; set; }
@@ -38,7 +36,6 @@ namespace Domain.Entities
 
         [Column(TypeName = "varchar(50)")]
         public string Ip { get; set; }
-
         public UserType UserType { get; set; }
         public ICollection<Booking> Booking { get; set; }
         public ICollection<UserCommentaries> UserCommentaries { get; set; }

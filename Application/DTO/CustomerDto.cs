@@ -26,9 +26,9 @@ namespace Application.DTO
         public virtual ICollection<Contacts> Contacts { get; set; }
         public virtual ICollection<CustomerFacilities> CustomerFacilities { get; set; }
         public virtual ICollection<CustomerPaymentMethods> CustomerPaymentMethods { get; set; }
-        public virtual ICollection<CustomerProfilePictures> CustomerProfilePictures { get; set; }
-        public virtual ICollection<CustomerTags> CustomerTags { get; set; }
-        public virtual ICollection<CustomerWorkDays> CustomerWorkDays { get; set; }
+        //public virtual ICollection<CustomerProfilePictures> CustomerProfilePictures { get; set; }
+        //public virtual ICollection<CustomerTags> CustomerTags { get; set; }
+        //public virtual ICollection<CustomerWorkDays> CustomerWorkDays { get; set; }
         public virtual ICollection<ProductCategory> ProductCategory { get; set; }
         public virtual ICollection<UserCommentaries> UserCommentaries { get; set; }
         public virtual ICollection<UserFavoriteCustomers> UserFavoriteCustomers { get; set; }

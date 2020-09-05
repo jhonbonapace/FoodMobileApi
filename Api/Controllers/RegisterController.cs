@@ -31,20 +31,18 @@ namespace Api.Controllers
             _appSettings = appSettings;
             _mapper = mapper;
 
-            _userService = new UserService(_context, _appSettings.Value);
+            _userService = new UserService(_context, _mapper, _appSettings.Value);
         }
 
         [HttpPost("Register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Register([FromBody] UserDTO userDTO)
+        public IActionResult Register([FromBody] UserDTO user)
         {
             try
             {
                 var remoteIpAddress = HttpContext.Connection.RemoteIpAddress;
-                userDTO.Ip = remoteIpAddress.ToString();
-
-                var user = _mapper.Map<User>(userDTO);
+                user.Ip = remoteIpAddress.ToString();
 
                 var response = _userService.Add(user);
 
@@ -52,7 +50,7 @@ namespace Api.Controllers
                     return BadRequest(response);
                 else
                 {
-                    IAuthService authService = new AuthService(_appSettings, _context);
+                    IAuthService authService = new AuthService(_appSettings, _context, _mapper);
 
                     var auth = new AuthenticateRequest() { Email = user.Email };
 

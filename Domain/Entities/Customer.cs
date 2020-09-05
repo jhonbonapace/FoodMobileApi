@@ -22,11 +22,13 @@ namespace Domain.Entities
         public int? ReservationMinPartySize { get; set; }
         public Address Address { get; set; }
         public DateTime? LastUpdate { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
         public ICollection<Booking> Booking { get; set; }
         public ICollection<Contacts> Contacts { get; set; }
         public ICollection<CustomerFacilities> CustomerFacilities { get; set; }
         public ICollection<CustomerPaymentMethods> CustomerPaymentMethods { get; set; }
-        public ICollection<Product> Products { get; set; }
+        public ICollection<ProductCategory> ProductCategories { get; set; }
         public ICollection<CustomerTag> CustomerTags { get; set; }
         public ICollection<CustomerWorkDay> CustomerWorkDays { get; set; }
         public ICollection<UserCommentaries> UserCommentaries { get; set; }

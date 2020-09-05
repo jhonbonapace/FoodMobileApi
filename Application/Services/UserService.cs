@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Application.DTO;
 using Application.Interface;
+using AutoMapper;
 using CrossCuting.Extensions;
 using CrossCutting.Extensions;
 using Domain.Entities;
@@ -16,13 +17,14 @@ namespace Application.Services
     public class UserService : IUserService
     {
         Serilog.Core.Logger _logger;
-        private IUserRepository _userRepository;
+        private IMapper _mapper;
         private AppSettings _appSettings;
-        public UserService(DatabaseContext context, AppSettings appSettings)
+        private IUserRepository _userRepository;
+        public UserService(DatabaseContext context, IMapper mapper, AppSettings appSettings)
         {
             LoggerExtension logger = new LoggerExtension();
             _logger = logger.CreateLogger();
-
+            _mapper = mapper;
             _userRepository = new UserRepository(context);
             _appSettings = appSettings;
         }
@@ -32,16 +34,15 @@ namespace Application.Services
             _userRepository = new UserRepository(context);
         }
 
-        public ResponseModel<User> Get(int Id)
+        public ResponseModel<UserDTO> Get(int Id)
         {
-            ResponseModel<User> model = new ResponseModel<User>();
+            ResponseModel<UserDTO> model = new ResponseModel<UserDTO>();
 
             try
             {
-
                 User user = _userRepository.Get(Id);
 
-                model.Response.Data = user;
+                model.Response.Data = _mapper.Map<UserDTO>(user);
 
                 model.Response.Success = true;
 
@@ -55,15 +56,15 @@ namespace Application.Services
             return model;
         }
 
-        public ResponseModel<User> Get(string Email)
+        public ResponseModel<UserDTO> Get(string Email)
         {
-            ResponseModel<User> model = new ResponseModel<User>();
+            ResponseModel<UserDTO> model = new ResponseModel<UserDTO>();
 
             try
             {
                 User user = _userRepository.Get(Email);
 
-                model.Response.Data = user;
+                model.Response.Data = _mapper.Map<UserDTO>(user);
 
                 model.Response.Success = true;
 
@@ -77,9 +78,9 @@ namespace Application.Services
             return model;
         }
 
-        public ResponseModel<User> Get(string Email, string Password)
+        public ResponseModel<UserDTO> Get(string Email, string Password)
         {
-            ResponseModel<User> model = new ResponseModel<User>();
+            ResponseModel<UserDTO> model = new ResponseModel<UserDTO>();
 
             try
             {
@@ -89,11 +90,9 @@ namespace Application.Services
                 {
                     AuthExtensions authExtensions = new AuthExtensions(_appSettings);
 
-                    user.Password = Password;
+                    model.Response.Success = authExtensions.ValidatePassword(Password, user.PasswordHash, user.PasswordSalt);
 
-                    model.Response.Success = authExtensions.ValidatePassword(user);
-
-                    model.Response.Data = model.Response.Success ? user : null;
+                    model.Response.Data = model.Response.Success ? _mapper.Map<UserDTO>(user) : null;
                 }
                 else
                     model.Response.Success = false;
@@ -108,13 +107,15 @@ namespace Application.Services
             return model;
         }
 
-        public ResponseModel<IEnumerable<User>> List()
+        public ResponseModel<IEnumerable<UserDTO>> List()
         {
-            ResponseModel<IEnumerable<User>> model = new ResponseModel<IEnumerable<User>>();
+            ResponseModel<IEnumerable<UserDTO>> model = new ResponseModel<IEnumerable<UserDTO>>();
 
             try
             {
-                model.Response.Data = _userRepository.List();
+                IEnumerable<User> list = _userRepository.List();
+
+                model.Response.Data = _mapper.Map<IEnumerable<UserDTO>>(list);
 
                 model.Response.Success = true;
 
@@ -128,20 +129,25 @@ namespace Application.Services
             return model;
         }
 
-        public ResponseModel<User> Add(User user)
+        public ResponseModel<UserDTO> Add(UserDTO userDTO)
         {
 
-            ResponseModel<User> model = new ResponseModel<User>();
+            ResponseModel<UserDTO> model = new ResponseModel<UserDTO>();
 
             try
             {
-                User HasUser = _userRepository.Get(user.Email);
+                User HasUser = _userRepository.Get(userDTO.Email);
 
                 if (HasUser is null)
                 {
                     AuthExtensions authExtensions = new AuthExtensions(_appSettings);
 
-                    authExtensions.GeneratePassword(ref user);
+                    User user = _mapper.Map<User>(userDTO);
+
+                    authExtensions.GeneratePassword(userDTO.Password, out string PasswordHash,out string PasswordSalt);
+
+                    user.PasswordHash = PasswordHash;
+                    user.PasswordSalt = PasswordSalt;
 
                     var response = _userRepository.Add(user);
 
@@ -162,13 +168,15 @@ namespace Application.Services
             return model;
         }
 
-        public ResponseModel Update(User user)
+        public ResponseModel Update(UserDTO UserDTO)
         {
 
             ResponseModel model = new ResponseModel();
 
             try
             {
+                User user = _mapper.Map<User>(UserDTO);
+
                 _userRepository.Update(user);
 
                 model.Success = true;

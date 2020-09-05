@@ -1,6 +1,7 @@
 ﻿using Application.DTO;
 using Application.DTO.Auth;
 using Application.Interface;
+using AutoMapper;
 using CrossCutting.Extensions;
 using Domain.Entities;
 using Domain.Helpers;
@@ -16,15 +17,16 @@ namespace Application.Services
 {
     public class AuthService : IAuthService
     {
+        IMapper _mapper;
         Serilog.Core.Logger _logger;
         private readonly AppSettings _appSettings;
         private readonly DatabaseContext _context;
 
-        public AuthService(IOptions<AppSettings> appSettings, DatabaseContext context)
+        public AuthService(IOptions<AppSettings> appSettings, DatabaseContext context,IMapper mapper)
         {
             LoggerExtension logger = new LoggerExtension();
             _logger = logger.CreateLogger();
-
+            _mapper =  mapper;
             _appSettings = appSettings.Value;
             _context = context;
         }
@@ -35,27 +37,27 @@ namespace Application.Services
 
             try
             {
-                IUserService userService = new UserService(_context, _appSettings);
+                IUserService userService = new UserService(_context, _mapper, _appSettings);
 
-                ResponseModel<User> response;
+                ResponseModel<UserDTO> response;
 
                 if (!IsRegistration)
                     response = userService.Get(auth.Email, auth.Password);
                 else
                     response = userService.Get(auth.Email);
 
-
                 if (response.Response.Success)
                 {
+                    User user = _mapper.Map<User>(response.Response.Data);
 
-                    var token = GenerateAuthToken(response.Response.Data);
-                    model.Response.Data = new AuthenticateResponse(response.Response.Data, token);
+                    var token = GenerateAuthToken(user);
+                    model.Response.Data = new AuthenticateResponse(user, token);
 
                     model.Response.Success = true;
                 }
                 else
                 {
-                    model.Response.Message = "Username or password is incorrect.";
+                    model.Response.Message = "Usuário ou senha incorretos.";
                     model.Response.Success = false;
                 }
             }

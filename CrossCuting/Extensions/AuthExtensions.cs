@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using Domain.Helpers;
+﻿using Domain.Helpers;
 
 namespace CrossCuting.Extensions
 {
@@ -10,17 +9,14 @@ namespace CrossCuting.Extensions
         {
             _appSettings = appSettings;
         }
-        public bool ValidatePassword(User user)
+        public bool ValidatePassword(string Password, string PasswordHash, string PasswordSalt)
         {
-            return user.PasswordHash.Equals(BCrypt.Net.BCrypt.HashPassword(user.Password, user.PasswordSalt));
+            return PasswordHash.Equals(BCrypt.Net.BCrypt.HashPassword(Password, PasswordSalt));
         }
-
-        public void GeneratePassword(ref User user)
+        public void GeneratePassword(string Password, out string PasswordSalt,out string PasswordHash)
         {
-
-            user.PasswordSalt = BCrypt.Net.BCrypt.GenerateSalt(_appSettings.WorkFactor);
-
-            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.Password, user.PasswordSalt);
+            PasswordSalt = BCrypt.Net.BCrypt.GenerateSalt(_appSettings.WorkFactor);
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(Password, PasswordSalt);
         }
     }
 }

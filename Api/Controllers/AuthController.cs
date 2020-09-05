@@ -1,5 +1,6 @@
 ﻿using Application.DTO.Auth;
 using Application.Interface;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,12 +12,14 @@ namespace Api.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private IMapper _mapper;
         private IAuthService _authService;
         private readonly ILogger<AuthController> _logger;
 
-        public AuthController(ILogger<AuthController> logger, IAuthService authService)
+        public AuthController(ILogger<AuthController> logger, IAuthService authService, IMapper mapper)
         {
             _logger = logger;
+            _mapper = mapper;
             _authService = authService;
         }
 

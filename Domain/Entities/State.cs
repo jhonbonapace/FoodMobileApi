@@ -14,12 +14,9 @@ namespace Domain.Entities
         [Column(TypeName = "varchar(2)")]
         public string Initials { get; set; }
 
-        [Column(TypeName = "varchar(10)")]
+        [Column(TypeName = "varchar(50)")]
         public string NumberCode { get; set; }
-
+        public int CountryId { get; set; }
         public Country Country { get; set; }
-
-        public int CityId { get; set; }
-        public City City { get; set; }
     }
 }

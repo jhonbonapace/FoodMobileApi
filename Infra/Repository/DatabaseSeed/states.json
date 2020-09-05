@@ -4,7 +4,7 @@
 		"Name" : "Acre",
 		"Initials" : "AC",
 		"IBGECode" : 12,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "68"
 	},
 	{
@@ -12,7 +12,7 @@
 		"Name" : "Alagoas",
 		"Initials" : "AL",
 		"IBGECode" : 27,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "82"
 	},
 	{
@@ -20,7 +20,7 @@
 		"Name" : "Amazonas",
 		"Initials" : "AM",
 		"IBGECode" : 13,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "97,92"
 	},
 	{
@@ -28,7 +28,7 @@
 		"Name" : "Amapá",
 		"Initials" : "AP",
 		"IBGECode" : 16,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "96"
 	},
 	{
@@ -36,7 +36,7 @@
 		"Name" : "Bahia",
 		"Initials" : "BA",
 		"IBGECode" : 29,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "77,75,73,74,71"
 	},
 	{
@@ -44,7 +44,7 @@
 		"Name" : "Ceará",
 		"Initials" : "CE",
 		"IBGECode" : 23,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "88,85"
 	},
 	{
@@ -52,7 +52,7 @@
 		"Name" : "Distrito Federal",
 		"Initials" : "DF",
 		"IBGECode" : 53,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "61"
 	},
 	{
@@ -60,7 +60,7 @@
 		"Name" : "Espírito Santo",
 		"Initials" : "ES",
 		"IBGECode" : 32,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "28,27"
 	},
 	{
@@ -68,7 +68,7 @@
 		"Name" : "Goiás",
 		"Initials" : "GO",
 		"IBGECode" : 52,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "62,64,61"
 	},
 	{
@@ -76,7 +76,7 @@
 		"Name" : "Maranhão",
 		"Initials" : "MA",
 		"IBGECode" : 21,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "99,98"
 	},
 	{
@@ -84,7 +84,7 @@
 		"Name" : "Minas Gerais",
 		"Initials" : "MG",
 		"IBGECode" : 31,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "34,37,31,33,35,38,32"
 	},
 	{
@@ -92,7 +92,7 @@
 		"Name" : "Mato Grosso do Sul",
 		"Initials" : "MS",
 		"IBGECode" : 50,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "67"
 	},
 	{
@@ -100,7 +100,7 @@
 		"Name" : "Mato Grosso",
 		"Initials" : "MT",
 		"IBGECode" : 51,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "65,66"
 	},
 	{
@@ -108,7 +108,7 @@
 		"Name" : "Pará",
 		"Initials" : "PA",
 		"IBGECode" : 15,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "91,94,93"
 	},
 	{
@@ -116,7 +116,7 @@
 		"Name" : "Paraíba",
 		"Initials" : "PB",
 		"IBGECode" : 25,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "83"
 	},
 	{
@@ -124,7 +124,7 @@
 		"Name" : "Pernambuco",
 		"Initials" : "PE",
 		"IBGECode" : 26,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "81,87"
 	},
 	{
@@ -132,7 +132,7 @@
 		"Name" : "Piauí",
 		"Initials" : "PI",
 		"IBGECode" : 22,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "89,86"
 	},
 	{
@@ -140,7 +140,7 @@
 		"Name" : "Paraná",
 		"Initials" : "PR",
 		"IBGECode" : 41,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "43,41,42,44,45,46"
 	},
 	{
@@ -148,7 +148,7 @@
 		"Name" : "Rio de Janeiro",
 		"Initials" : "RJ",
 		"IBGECode" : 33,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "24,22,21"
 	},
 	{
@@ -156,7 +156,7 @@
 		"Name" : "Rio Grande do Norte",
 		"Initials" : "RN",
 		"IBGECode" : 24,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "84"
 	},
 	{
@@ -164,7 +164,7 @@
 		"Name" : "Rondônia",
 		"Initials" : "RO",
 		"IBGECode" : 11,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "69"
 	},
 	{
@@ -172,7 +172,7 @@
 		"Name" : "Roraima",
 		"Initials" : "RR",
 		"IBGECode" : 14,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "95"
 	},
 	{
@@ -180,7 +180,7 @@
 		"Name" : "Rio Grande do Sul",
 		"Initials" : "RS",
 		"IBGECode" : 43,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "53,54,55,51"
 	},
 	{
@@ -188,7 +188,7 @@
 		"Name" : "Santa Catarina",
 		"Initials" : "SC",
 		"IBGECode" : 42,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "47,48,49"
 	},
 	{
@@ -196,7 +196,7 @@
 		"Name" : "Sergipe",
 		"Initials" : "SE",
 		"IBGECode" : 28,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "79"
 	},
 	{
@@ -204,7 +204,7 @@
 		"Name" : "São Paulo",
 		"Initials" : "SP",
 		"IBGECode" : 35,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "11,12,13,14,15,16,17,18,19"
 	},
 	{
@@ -212,7 +212,7 @@
 		"Name" : "Tocantins",
 		"Initials" : "TO",
 		"IBGECode" : 17,
-		"IdCountry" : 1,
+		"CountryId" : 1,
 		"NumberCode" : "63"
 	}
 ]

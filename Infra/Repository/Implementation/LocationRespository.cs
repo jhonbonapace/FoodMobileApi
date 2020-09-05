@@ -2,7 +2,6 @@
 using Infra.Repository.Interface;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace Infra.Repository.Implementation
 {
@@ -17,23 +16,20 @@ namespace Infra.Repository.Implementation
 
         public IEnumerable<Country> GetCountries()
         {
-            return default(IEnumerable<Country>);
-            // return _context.Country
-            //     .OrderBy(p => p.Id).ToList();
+             return _context.Country
+                 .OrderBy(p => p.Id).ToList();
         }
 
-        public IEnumerable<State> GetStates(int IdCountry)
+        public IEnumerable<State> GetStates(int CountryId)
         {
-            return default(IEnumerable<State>);
-            // return _context.State.Where(e => e.IdCountry == IdCountry)
-            //     .OrderBy(p => p.Id).ToList();
+            return _context.State.Where(e => e.CountryId == CountryId)
+                    .OrderBy(p => p.Id).ToList();
         }
 
-        public IEnumerable<City> GetCities(int IdState)
+        public IEnumerable<City> GetCities(int StateId)
         {
-            return default(IEnumerable<City>);
-            // return _context.City.Where(e => e.IdState == IdState)
-            //     .OrderBy(p => p.Id).ToList();
+            return _context.City.Where(e => e.StateId == StateId)
+                .OrderBy(p => p.Id).ToList();
         }
     }
 }
