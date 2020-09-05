@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
-    public partial class Facility : Base
+    public class Facility : Base
     {
-        // public Facility()
-        // {
-        //     CustomerFacilities = new HashSet<CustomerFacilities>();
-        // }
+        [Column(TypeName = "varchar(50)")]
         public string Description { get; set; }
         public int Code { get; set; }
 

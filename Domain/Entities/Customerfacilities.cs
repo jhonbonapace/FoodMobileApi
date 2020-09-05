@@ -1,8 +1,12 @@
-﻿namespace Domain.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Domain.Entities
 {
-    public partial class CustomerFacilities : Base
+    public class CustomerFacilities : Base
     {
         public ulong IsActive { get; set; }
+
+        [Column(TypeName = "varchar(50)")]
         public string Description { get; set; }
 
         public int CustomerId { get; set; }

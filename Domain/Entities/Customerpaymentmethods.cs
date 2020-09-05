@@ -1,11 +1,11 @@
 ﻿namespace Domain.Entities
 {
-    public partial class CustomerPaymentMethods : Base
+    public class CustomerPaymentMethods : Base
     {
-        public int IdPaymentMethod { get; set; }
-        public int IdCustomer { get; set; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
 
-        public virtual Customer IdCustomerNavigation { get; set; }
-        public virtual Paymentmethod IdPaymentMethodNavigation { get; set; }
+        public int PaymentMethodId { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
     }
 }

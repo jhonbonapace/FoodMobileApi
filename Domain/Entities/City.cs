@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
-    public partial class City: Base
+    public class City : Base
     {
-        public City()
-        {
-            Address = new HashSet<Address>();
-        }
+        [Column(TypeName = "varchar(50)")]
         public string Name { get; set; }
-        public int IdState { get; set; }
-        public string Ibgecode { get; set; }
 
-        public virtual State IdStateNavigation { get; set; }
-        public virtual ICollection<Address> Address { get; set; }
+        [Column(TypeName = "varchar(10)")]
+        public string IbgeCode { get; set; }
+        public State State { get; set; }
+
+        public int AddressId { get; set; }
+        public Address Address { get; set; }
     }
 }

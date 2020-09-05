@@ -1,11 +1,11 @@
 ﻿namespace Domain.Entities
 {
-    public partial class UserFavoriteCustomers : Base
+    public class CustomerTag : Base
     {
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
 
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public int TagId { get; set; }
+        public Tag Tag { get; set; }
     }
 }
