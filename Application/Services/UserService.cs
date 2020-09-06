@@ -1,5 +1,4 @@
 ﻿using Application.DTO;
-using Application.DTO.Email;
 using Application.Interface;
 using AutoMapper;
 using CrossCuting.Extensions;
@@ -28,6 +27,12 @@ namespace Application.Services
             _mapper = mapper;
             _userRepository = new UserRepository(context);
             _appSettings = appSettings;
+        }
+
+        public UserService(DatabaseContext context, IMapper mapper)
+        {
+            _mapper = mapper;
+            _userRepository = new UserRepository(context);
         }
 
         public UserService(DatabaseContext context)
@@ -91,7 +96,7 @@ namespace Application.Services
                 {
                     AuthExtensions authExtensions = new AuthExtensions(_appSettings);
 
-                    model.Response.Success = authExtensions.ValidatePassword(Password, user.PasswordHash, user.PasswordSalt);
+                    model.Response.Success = authExtensions.ValidatePassword(Password, user.PasswordHash);
 
                     model.Response.Data = model.Response.Success ? _mapper.Map<UserDTO>(user) : null;
                 }
@@ -145,7 +150,7 @@ namespace Application.Services
 
                     User user = _mapper.Map<User>(userDTO);
 
-                    authExtensions.GeneratePassword(userDTO.Password, out string PasswordHash,out string PasswordSalt);
+                    authExtensions.GeneratePassword(userDTO.Password, out string PasswordSalt, out string PasswordHash);
 
                     user.PasswordHash = PasswordHash;
                     user.PasswordSalt = PasswordSalt;

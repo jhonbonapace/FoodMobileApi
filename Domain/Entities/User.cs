@@ -7,7 +7,7 @@ namespace Domain.Entities
 {
     public class User : Base
     {
-        [Column(TypeName = "varchar(50)")]
+        [Column(TypeName = "varchar(100)")]
         public string Name { get; set; }
 
         [Column(TypeName = "varchar(100)")]
@@ -16,7 +16,7 @@ namespace Domain.Entities
         [Column(TypeName = "varchar(14)")]
         public string Identity { get; set; }
 
-        [Column(TypeName = "varchar(11)")]
+        [Column(TypeName = "varchar(15)")]
         public string Telephone { get; set; }
         public DateTime? BirthDate { get; set; }
 
@@ -25,16 +25,16 @@ namespace Domain.Entities
 
         public int FailedAttempts { get; set; }
 
-        [Column(TypeName = "varchar(50)")]
+        [Column(TypeName = "varchar(100)")]
         public string PasswordHash { get; set; }
 
-        [Column(TypeName = "varchar(20)")]
+        [Column(TypeName = "varchar(100)")]
         public string PasswordSalt { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
         public bool? Deleted { get; set; }
 
-        [Column(TypeName = "varchar(50)")]
+        [Column(TypeName = "varchar(15)")]
         public string Ip { get; set; }
         public UserType UserType { get; set; }
         public UserSettings UserSettings { get; set; }

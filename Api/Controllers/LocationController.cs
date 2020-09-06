@@ -35,8 +35,6 @@ namespace Api.Controllers
             _ILocationService = new LocationService(_context, _mapboxSettings);
         }
 
-
-
         [HttpGet("Location/Search")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> LocationSearch([FromQuery] string location)
@@ -51,7 +49,7 @@ namespace Api.Controllers
             {
                 _logger.LogError(ex, ex.Message);
 
-                return StatusCode(500);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
@@ -80,7 +78,7 @@ namespace Api.Controllers
             {
                 _logger.LogError(ex, ex.Message);
 
-                return StatusCode(500);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
@@ -112,7 +110,7 @@ namespace Api.Controllers
             {
                 _logger.LogError(ex, ex.Message);
 
-                return StatusCode(500);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
@@ -128,7 +126,7 @@ namespace Api.Controllers
             {
                 _logger.LogError(ex, ex.Message);
 
-                return StatusCode(500);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
     }

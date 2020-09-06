@@ -41140,9 +41140,14 @@ namespace Api.Migrations
                     b.Property<byte[]>("Thumbnail")
                         .HasColumnType("bytea");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Customer");
                 });
@@ -41284,6 +41289,27 @@ namespace Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Facility");
+                });
+
+            modelBuilder.Entity("Domain.Entities.NotificationSettings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<bool>("Email")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("SMS")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("Whatsapp")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NotificationSettings");
                 });
 
             modelBuilder.Entity("Domain.Entities.PaymentMethod", b =>
@@ -41448,7 +41474,7 @@ namespace Api.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<decimal?>("Price")
                         .HasColumnType("numeric");
@@ -41807,22 +41833,22 @@ namespace Api.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Identity")
-                        .HasColumnType("varchar(11)");
+                        .HasColumnType("varchar(14)");
 
                     b.Property<string>("Ip")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(15)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("PasswordSalt")
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Telephone")
-                        .HasColumnType("varchar(11)");
+                        .HasColumnType("varchar(15)");
 
                     b.Property<byte[]>("Thumbnail")
                         .HasColumnType("bytea");
@@ -41831,7 +41857,7 @@ namespace Api.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("UserType")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -41869,7 +41895,7 @@ namespace Api.Migrations
                     b.ToTable("UserCommentaries");
                 });
 
-            modelBuilder.Entity("Domain.Entities.UserFavoriteCustomers", b =>
+            modelBuilder.Entity("Domain.Entities.UserFavoriteCustomer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -41889,6 +41915,55 @@ namespace Api.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserFavoriteCustomers");
+                });
+
+            modelBuilder.Entity("Domain.Entities.UserSettings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("NotificationSettingsId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NotificationSettingsId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("UserSettings");
+                });
+
+            modelBuilder.Entity("Domain.Models.PasswordRecovery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("ExpireDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("HashKey")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("SetOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PasswordRecovery");
                 });
 
             modelBuilder.Entity("Domain.Entities.Address", b =>
@@ -41938,6 +42013,12 @@ namespace Api.Migrations
                     b.HasOne("Domain.Entities.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId");
+
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.CustomerFacilities", b =>
@@ -42045,7 +42126,7 @@ namespace Api.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Entities.UserFavoriteCustomers", b =>
+            modelBuilder.Entity("Domain.Entities.UserFavoriteCustomer", b =>
                 {
                     b.HasOne("Domain.Entities.Customer", "Customer")
                         .WithMany("UserFavoriteCustomers")
@@ -42055,6 +42136,28 @@ namespace Api.Migrations
 
                     b.HasOne("Domain.Entities.User", "User")
                         .WithMany("UserFavoriteCustomers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.UserSettings", b =>
+                {
+                    b.HasOne("Domain.Entities.NotificationSettings", "NotificationSettings")
+                        .WithMany()
+                        .HasForeignKey("NotificationSettingsId");
+
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithOne("UserSettings")
+                        .HasForeignKey("Domain.Entities.UserSettings", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Models.PasswordRecovery", b =>
+                {
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

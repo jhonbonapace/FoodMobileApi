@@ -1,8 +1,5 @@
-using Api.Middlewares;
-using AutoMapper;
 using Domain.Helpers;
 using Infra.Repository;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Core;
-using System;
 
 namespace Api
 {

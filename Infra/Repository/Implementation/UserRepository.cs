@@ -20,6 +20,7 @@ namespace Infra.Repository.Implementation
             return _context.User.Where(
                      p => p.Id == Id).FirstOrDefault();
         }
+
         public User Get(string Email)
         {
             return _context.User.Where(
@@ -43,7 +44,7 @@ namespace Infra.Repository.Implementation
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 return false;

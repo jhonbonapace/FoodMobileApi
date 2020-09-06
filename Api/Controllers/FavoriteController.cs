@@ -45,7 +45,7 @@ namespace Api.Controllers
             {
                 _logger.LogError(ex, ex.Message);
 
-                return StatusCode(500);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
@@ -65,7 +65,7 @@ namespace Api.Controllers
             {
                 _logger.LogError(ex, ex.Message);
 
-                return StatusCode(500);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
@@ -83,7 +83,7 @@ namespace Api.Controllers
             {
                 _logger.LogError(ex, ex.Message);
 
-                return StatusCode(500);
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
     }

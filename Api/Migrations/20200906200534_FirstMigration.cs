@@ -39,6 +39,21 @@ namespace Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NotificationSettings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Email = table.Column<bool>(nullable: false),
+                    Whatsapp = table.Column<bool>(nullable: false),
+                    SMS = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NotificationSettings", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Paymentmethod",
                 columns: table => new
                 {
@@ -73,21 +88,21 @@ namespace Api.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "varchar(50)", nullable: true),
+                    Name = table.Column<string>(type: "varchar(100)", nullable: true),
                     Email = table.Column<string>(type: "varchar(100)", nullable: true),
-                    Identity = table.Column<string>(type: "varchar(11)", nullable: true),
-                    Telephone = table.Column<string>(type: "varchar(11)", nullable: true),
+                    Identity = table.Column<string>(type: "varchar(14)", nullable: true),
+                    Telephone = table.Column<string>(type: "varchar(15)", nullable: true),
                     BirthDate = table.Column<DateTime>(nullable: true),
                     Gender = table.Column<int>(nullable: true),
                     Thumbnail = table.Column<byte[]>(nullable: true),
                     FailedAttempts = table.Column<int>(nullable: false),
-                    PasswordHash = table.Column<string>(type: "varchar(50)", nullable: true),
-                    PasswordSalt = table.Column<string>(type: "varchar(20)", nullable: true),
+                    PasswordHash = table.Column<string>(type: "varchar(100)", nullable: true),
+                    PasswordSalt = table.Column<string>(type: "varchar(100)", nullable: true),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     UpdateDate = table.Column<DateTime>(nullable: true),
                     Deleted = table.Column<bool>(nullable: true),
-                    Ip = table.Column<string>(type: "varchar(50)", nullable: true),
-                    UserType = table.Column<int>(nullable: false)
+                    Ip = table.Column<string>(type: "varchar(15)", nullable: true),
+                    UserType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -113,6 +128,54 @@ namespace Api.Migrations
                         name: "FK_State_Country_CountryId",
                         column: x => x.CountryId,
                         principalTable: "Country",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PasswordRecovery",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    HashKey = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: false),
+                    SetOn = table.Column<DateTime>(nullable: false),
+                    ExpireDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PasswordRecovery", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PasswordRecovery_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserSettings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    NotificationSettingsId = table.Column<int>(nullable: true),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserSettings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserSettings_NotificationSettings_NotificationSettingsId",
+                        column: x => x.NotificationSettingsId,
+                        principalTable: "NotificationSettings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserSettings_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -178,7 +241,8 @@ namespace Api.Migrations
                     ReservationMaxPartySize = table.Column<int>(nullable: true),
                     ReservationMinPartySize = table.Column<int>(nullable: true),
                     AddressId = table.Column<int>(nullable: true),
-                    LastUpdate = table.Column<DateTime>(nullable: true)
+                    LastUpdate = table.Column<DateTime>(nullable: true),
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -189,6 +253,12 @@ namespace Api.Migrations
                         principalTable: "Address",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Customer_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -450,7 +520,7 @@ namespace Api.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "varchar(10)", nullable: true),
+                    Name = table.Column<string>(type: "varchar(100)", nullable: true),
                     Description = table.Column<string>(type: "varchar(500)", nullable: true),
                     Price = table.Column<decimal>(nullable: true),
                     IsPriceless = table.Column<bool>(nullable: true),
@@ -6455,6 +6525,11 @@ namespace Api.Migrations
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Customer_UserId",
+                table: "Customer",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CustomerFacilities_CustomerId",
                 table: "CustomerFacilities",
                 column: "CustomerId");
@@ -6495,6 +6570,11 @@ namespace Api.Migrations
                 column: "CustomerWorkDayId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PasswordRecovery_UserId",
+                table: "PasswordRecovery",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Product_ProductCategoryId",
                 table: "Product",
                 column: "ProductCategoryId");
@@ -6528,6 +6608,17 @@ namespace Api.Migrations
                 name: "IX_UserFavoriteCustomers_UserId",
                 table: "UserFavoriteCustomers",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserSettings_NotificationSettingsId",
+                table: "UserSettings",
+                column: "NotificationSettingsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserSettings_UserId",
+                table: "UserSettings",
+                column: "UserId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -6551,6 +6642,9 @@ namespace Api.Migrations
                 name: "CustomerWorkDayTimeOff");
 
             migrationBuilder.DropTable(
+                name: "PasswordRecovery");
+
+            migrationBuilder.DropTable(
                 name: "Product");
 
             migrationBuilder.DropTable(
@@ -6558,6 +6652,9 @@ namespace Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserFavoriteCustomers");
+
+            migrationBuilder.DropTable(
+                name: "UserSettings");
 
             migrationBuilder.DropTable(
                 name: "Facility");
@@ -6575,13 +6672,16 @@ namespace Api.Migrations
                 name: "ProductCategory");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "NotificationSettings");
 
             migrationBuilder.DropTable(
                 name: "Customer");
 
             migrationBuilder.DropTable(
                 name: "Address");
+
+            migrationBuilder.DropTable(
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "City");

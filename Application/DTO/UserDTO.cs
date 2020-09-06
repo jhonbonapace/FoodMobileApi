@@ -16,7 +16,6 @@ namespace Application.DTO
         public DateTime? BirthDate { get; set; }
         public Gender? Gender { get; set; }
         public byte[] Thumbnail { get; set; }
-        public UserType UserType { get; set; }
         public int FailedAttempts { get; set; }
         [JsonIgnore]
         public string PasswordConfirmed { get; set; }
@@ -26,13 +25,11 @@ namespace Application.DTO
         public DateTime? UpdateDate { get; set; }
         public bool? Deleted { get; set; }
         public string Ip { get; set; }
+        public UserType UserType { get; set; }
         public UserSettings UserSettings { get; set; }
-        public virtual ICollection<Booking> Booking { get; set; }
-        public virtual ICollection<Customer> Customer { get; set; }
-        public virtual ICollection<UserCommentaries> UserCommentaries { get; set; }
-        public virtual ICollection<UserFavoriteCustomer> UserFavoriteCustomers { get; set; }
-
-
+        public ICollection<Booking> Booking { get; set; }
+        public ICollection<UserCommentaries> UserCommentaries { get; set; }
+        public ICollection<UserFavoriteCustomer> UserFavoriteCustomers { get; set; }
     }
 
     public class UserDTOValidator : AbstractValidator<UserDTO>

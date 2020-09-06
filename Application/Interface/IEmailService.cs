@@ -1,11 +1,9 @@
-﻿using Application.DTO.Email;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Application.Interface
 {
     public interface IEmailService
     {
-        Task Send(List<EmailRecipientDTO> _recipient, string _subject, string _content);
+        Task SendEmailAsync(string email, string subject, string message);
     }
 }

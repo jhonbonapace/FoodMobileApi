@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Helpers;
+using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -52,6 +53,7 @@ namespace Infra.Repository
 
         // public virtual DbSet<Tags> Tags { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<PasswordRecovery> PasswordRecovery { get; set; }
         // public virtual DbSet<UserCommentaries> UserCommentaries { get; set; }
         public virtual DbSet<UserFavoriteCustomer> UserFavoriteCustomers { get; set; }
 
@@ -92,7 +94,6 @@ namespace Infra.Repository
                 string json = r.ReadToEnd();
                 IEnumerable<PaymentMethod> Paymentmethod = JsonConvert.DeserializeObject<IEnumerable<PaymentMethod>>(json);
                 modelBuilder.Entity<PaymentMethod>().HasData(Paymentmethod);
-
             }
             #endregion
 
