@@ -4,6 +4,7 @@ using AutoMapper;
 using CrossCuting.Extensions;
 using CrossCutting.Extensions;
 using Domain.Entities;
+using Domain.Helpers;
 using Domain.Models;
 using Infra.Repository;
 using Infra.Repository.Implementation;
@@ -16,16 +17,18 @@ namespace Application.Services
     {
         IMapper _mapper;
         Serilog.Core.Logger _logger;
-        private IUserService _userService;
+        private AppSettings _appSettings;
+        private IUserRepository _userRepository;
         private IRecoveryRepository _repository;
 
-        public RecoveryService(DatabaseContext context, IMapper mapper)
+        public RecoveryService(DatabaseContext context, IMapper mapper, AppSettings appSettings)
         {
             LoggerExtension logger = new LoggerExtension();
             _mapper = mapper;
             _logger = logger.CreateLogger();
             _repository = new RecoveryRepository(context);
-            _userService = new UserService(context, _mapper);
+            _userRepository = new UserRepository(context);
+            _appSettings = appSettings;
         }
 
         public ResponseModel<PasswordRecoveryDTO> Get(int IdRecovery, string Hash, string Email)
@@ -34,7 +37,7 @@ namespace Application.Services
 
             try
             {
-                PasswordRecovery item = _repository.Get(IdRecovery,Hash, Email);
+                PasswordRecovery item = _repository.Get(IdRecovery, Hash, Email);
 
                 model.Response.Data = _mapper.Map<PasswordRecoveryDTO>(item);
 
@@ -59,13 +62,10 @@ namespace Application.Services
                 // Create new instance of  recovery object
                 PasswordRecovery recovery;
                 // Get user response
-                ResponseModel<UserDTO> userResponse = _userService.Get(Email);
+                User user = _userRepository.Get(Email);
                 // Validate response
-                if (userResponse.Response.Data != null && userResponse.Response.Success)
+                if (user != null)
                 {
-                    //Map response
-                    User user = _mapper.Map<User>(userResponse.Response.Data);
-
                     //Create Hash string
                     string HashInput = string.Concat(user.Id, user.Email, DateTime.Now.ToString());
 
@@ -92,5 +92,44 @@ namespace Application.Services
 
             return model;
         }
+
+        public ResponseModel<bool> ChangePassword(PasswordRecoveryDTO recovery)
+        {
+            ResponseModel<bool> model = new ResponseModel<bool>();
+
+            try
+            {
+                User user = _userRepository.Get(recovery.User.Email);
+
+                if (user != null)
+                {
+                    AuthExtensions authExtensions = new AuthExtensions(_appSettings);
+
+                    authExtensions.GeneratePassword(recovery.Password, out string PasswordSalt, out string PasswordHash);
+
+                    user.PasswordHash = PasswordHash;
+                    user.PasswordSalt = PasswordSalt;
+
+                    var response = _userRepository.Update(user);
+
+                    PasswordRecovery item = _mapper.Map<PasswordRecovery>(recovery);
+
+                    item.Recovered = true;
+                    item.ModifiedOn = DateTime.Now;
+
+                    model.Response.Data = _repository.Update(item);
+
+                    model.Response.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, ex.Message);
+                model.Response.Success = false;
+            }
+
+            return model;
+        }
+
     }
 }

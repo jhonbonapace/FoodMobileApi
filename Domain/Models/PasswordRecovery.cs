@@ -8,8 +8,10 @@ namespace Domain.Models
 
         public string HashKey { get; set; }
         public int UserId { get; set; }
+        public bool Recovered { get; set; }
         public User User { get; set; }
         public DateTime SetOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
         public DateTime ExpireDate { get; set; }
     }
 }

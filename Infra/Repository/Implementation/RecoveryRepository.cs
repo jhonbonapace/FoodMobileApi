@@ -35,5 +35,22 @@ namespace Infra.Repository.Implementation
             }
 
         }
+        public bool Update(PasswordRecovery recovery)
+        {
+            try
+            {
+                _context.Attach(recovery);
+                _context.Entry(recovery).Property("ModifiedOn").IsModified = true;
+                _context.Entry(recovery).Property("Recovered").IsModified = true;
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
     }
 }
