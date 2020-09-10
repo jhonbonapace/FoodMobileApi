@@ -9,7 +9,7 @@ namespace Infra.Repository.Interface
     {
         User Get(int Id);
         User Get(string Email);
-        IEnumerable<User> List();
+        List<User> List();
         bool Add(User user);
         bool Update(User user);
         bool Delete(int Id);

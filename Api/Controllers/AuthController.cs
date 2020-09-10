@@ -34,10 +34,10 @@ namespace Api.Controllers
 
                 var response = _authService.Authenticate(model);
 
-                if (!response.Response.Success)
-                    return Unauthorized(response.Response);
+                if (!response.Success)
+                    return Unauthorized(response);
 
-                _logger.LogInformation($"Acesso concedido a {response.Response.Data.Name}");
+                _logger.LogInformation($"Acesso concedido a {response.Data.Name}");
 
 
                 return Ok(response);

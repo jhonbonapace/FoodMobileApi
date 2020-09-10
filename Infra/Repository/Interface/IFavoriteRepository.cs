@@ -5,7 +5,7 @@ namespace Infra.Repository.Interface
 {
     public interface IFavoriteRepository
     {
-        IEnumerable<UserFavoriteCustomer> List(int IdUser);
+        List<UserFavoriteCustomer> List(int IdUser);
         bool Add(UserFavoriteCustomer item);
         bool Delete(int Id);
     }

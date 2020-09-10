@@ -39,15 +39,15 @@ namespace Application.Services
             {
                 PasswordRecovery item = _repository.Get(IdRecovery, Hash, Email);
 
-                model.Response.Data = _mapper.Map<PasswordRecoveryDTO>(item);
+                model.Data = _mapper.Map<PasswordRecoveryDTO>(item);
 
-                if (model.Response.Data != null)
-                    model.Response.Success = model.Response.Data.ExpireDate > DateTime.Now ? true : false;
+                if (model.Data != null)
+                    model.Success = model.Data.ExpireDate > DateTime.Now ? true : false;
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Response.Success = false;
+                model.Success = false;
             }
 
             return model;
@@ -79,15 +79,15 @@ namespace Application.Services
                         SetOn = DateTime.Now
                     };
 
-                    model.Response.Data = _repository.Add(recovery);
+                    model.Data = _repository.Add(recovery);
                 }
 
-                model.Response.Success = true;
+                model.Success = true;
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Response.Success = false;
+                model.Success = false;
             }
 
             return model;
@@ -117,15 +117,15 @@ namespace Application.Services
                     item.Recovered = true;
                     item.ModifiedOn = DateTime.Now;
 
-                    model.Response.Data = _repository.Update(item);
+                    model.Data = _repository.Update(item);
 
-                    model.Response.Success = true;
+                    model.Success = true;
                 }
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Response.Success = false;
+                model.Success = false; 
             }
 
             return model;

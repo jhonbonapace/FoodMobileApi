@@ -14,19 +14,19 @@ namespace Infra.Repository.Implementation
             _context = context;
         }
 
-        public IEnumerable<Country> GetCountries()
+        public List<Country> GetCountries()
         {
              return _context.Country
                  .OrderBy(p => p.Id).ToList();
         }
 
-        public IEnumerable<State> GetStates(int CountryId)
+        public List<State> GetStates(int CountryId)
         {
             return _context.State.Where(e => e.CountryId == CountryId)
                     .OrderBy(p => p.Id).ToList();
         }
 
-        public IEnumerable<City> GetCities(int StateId)
+        public List<City> GetCities(int StateId)
         {
             return _context.City.Where(e => e.StateId == StateId)
                 .OrderBy(p => p.Id).ToList();

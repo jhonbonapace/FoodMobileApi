@@ -33,58 +33,58 @@ namespace Application.Services
             _locationRepository = new LocationRespository(context);
         }
 
-        public ResponseModel<IEnumerable<Country>> GetCountries()
+        public ResponseModel<List<Country>> GetCountries()
         {
-            ResponseModel<IEnumerable<Country>> model = new ResponseModel<IEnumerable<Country>>();
+            ResponseModel<List<Country>> model = new ResponseModel<List<Country>>();
 
             try
             {
-                model.Response.Data = _locationRepository.GetCountries();
+                model.Data = _locationRepository.GetCountries();
 
-                model.Response.Success = true;
+                model.Success = true;
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Response.Success = false;
+                model.Success = false;
             }
 
             return model;
         }
 
-        public ResponseModel<IEnumerable<State>> GetStates([FromQuery] int IdCountry)
+        public ResponseModel<List<State>> GetStates([FromQuery] int IdCountry)
         {
-            ResponseModel<IEnumerable<State>> model = new ResponseModel<IEnumerable<State>>();
+            ResponseModel<List<State>> model = new ResponseModel<List<State>>();
 
             try
             {
-                model.Response.Data = _locationRepository.GetStates(IdCountry);
+                model.Data = _locationRepository.GetStates(IdCountry);
 
-                model.Response.Success = true;
+                model.Success = true;
 
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Response.Success = false;
+                model.Success = false;
             }
 
             return model;
         }
-        public ResponseModel<IEnumerable<City>> GetCities([FromQuery] int IdState)
+        public ResponseModel<List<City>> GetCities([FromQuery] int IdState)
         {
-            ResponseModel<IEnumerable<City>> model = new ResponseModel<IEnumerable<City>>();
+            ResponseModel<List<City>> model = new ResponseModel<List<City>>();
 
             try
             {
-                model.Response.Data = _locationRepository.GetCities(IdState);
+                model.Data = _locationRepository.GetCities(IdState);
 
-                model.Response.Success = true;
+                model.Success = true;
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Response.Success = false;
+                model.Success = false;
             }
 
             return model;
@@ -101,15 +101,15 @@ namespace Application.Services
                 var result = await Client.GetAsync(enpoint);
                 var response = result.Content.ReadAsStringAsync().Result;
 
-                model.Response.Data = Serializer.Deserialize<MapboxPlacesDTO>(response);
+                model.Data = Serializer.Deserialize<MapboxPlacesDTO>(response);
 
-                model.Response.Success = true;
+                model.Success = true;
 
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Response.Success = false;
+                model.Success = false;
             }
 
             return model;

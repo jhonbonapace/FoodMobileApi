@@ -28,7 +28,7 @@ namespace Infra.Repository.Implementation
 
         }
 
-        public IEnumerable<User> List()
+        public List<User> List()
         {
             return _context.User
                 .OrderBy(p => p.Id).ToList();

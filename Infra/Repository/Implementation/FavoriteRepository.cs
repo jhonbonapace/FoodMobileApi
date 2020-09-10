@@ -14,7 +14,7 @@ namespace Infra.Repository.Implementation
             _context = context;
         }
 
-        public IEnumerable<UserFavoriteCustomer> List(int IdUser)
+        public List<UserFavoriteCustomer> List(int IdUser)
         {
             return _context.UserFavoriteCustomers.Where(e => e.UserId == IdUser)
             .OrderBy(p => p.Id).ToList();

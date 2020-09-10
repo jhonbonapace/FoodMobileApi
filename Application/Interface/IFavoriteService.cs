@@ -8,7 +8,7 @@ namespace Application.Interface
 {
     public interface IFavoriteService
     {
-        ResponseModel<IEnumerable<UserFavoriteCustomerDTO>> List(int IdUser);
+        ResponseModel<List<UserFavoriteCustomerDTO>> List(int IdUser);
         ResponseModel<bool> Add(UserFavoriteCustomerDTO favoriteItem);
         public ResponseModel<bool> Delete(int Id);
     }

@@ -17,9 +17,7 @@ namespace Application.DTO
         public Gender? Gender { get; set; }
         public byte[] Thumbnail { get; set; }
         public int FailedAttempts { get; set; }
-        [JsonIgnore]
         public string PasswordConfirmed { get; set; }
-        [JsonIgnore]
         public string Password { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }

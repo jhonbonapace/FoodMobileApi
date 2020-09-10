@@ -48,15 +48,15 @@ namespace Application.Services
             {
                 User user = _userRepository.Get(Id);
 
-                model.Response.Data = _mapper.Map<UserDTO>(user);
+                model.Data = _mapper.Map<UserDTO>(user);
 
-                model.Response.Success = true;
+                model.Success = true;
 
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Response.Success = false;
+                model.Success = false;
             }
 
             return model;
@@ -70,15 +70,15 @@ namespace Application.Services
             {
                 User user = _userRepository.Get(Email);
 
-                model.Response.Data = _mapper.Map<UserDTO>(user);
+                model.Data = _mapper.Map<UserDTO>(user);
 
-                model.Response.Success = true;
+                model.Success = true;
 
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Response.Success = false;
+                model.Success = false;
             }
 
             return model;
@@ -96,40 +96,40 @@ namespace Application.Services
                 {
                     AuthExtensions authExtensions = new AuthExtensions(_appSettings);
 
-                    model.Response.Success = authExtensions.ValidatePassword(Password, user.PasswordHash);
+                    model.Success = authExtensions.ValidatePassword(Password, user.PasswordHash);
 
-                    model.Response.Data = model.Response.Success ? _mapper.Map<UserDTO>(user) : null;
+                    model.Data = model.Success ? _mapper.Map<UserDTO>(user) : null;
                 }
                 else
-                    model.Response.Success = false;
+                    model.Success = false;
 
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Response.Success = false;
+                model.Success = false;
             }
 
             return model;
         }
 
-        public ResponseModel<IEnumerable<UserDTO>> List()
+        public ResponseModel<List<UserDTO>> List()
         {
-            ResponseModel<IEnumerable<UserDTO>> model = new ResponseModel<IEnumerable<UserDTO>>();
+            ResponseModel<List<UserDTO>> model = new ResponseModel<List<UserDTO>>();
 
             try
             {
                 IEnumerable<User> list = _userRepository.List();
 
-                model.Response.Data = _mapper.Map<IEnumerable<UserDTO>>(list);
+                model.Data = _mapper.Map<List<UserDTO>>(list);
 
-                model.Response.Success = true;
+                model.Success = true;
 
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Response.Success = false;
+                model.Success = false;
             }
 
             return model;
@@ -157,18 +157,18 @@ namespace Application.Services
 
                     var response = _userRepository.Add(user);
 
-                    model.Response.Success = response;
+                    model.Success = response;
                 }
                 else
                 {
-                    model.Response.Message = "O email informado já existe.";
-                    model.Response.Success = false;
+                    model.Message = "O email informado já existe.";
+                    model.Success = false;
                 }
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Response.Success = false;
+                model.Success = false;
             }
 
             return model;

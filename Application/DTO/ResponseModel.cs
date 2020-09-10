@@ -1,12 +1,15 @@
-﻿namespace Application.DTO
+﻿using System;
+
+namespace Application.DTO
 {
-    public class ResponseModel<T>
+    public class ResponseModel<T> : ResponseModel where T : new()
     {
         public ResponseModel()
         {
-            Response = new ResponseDataModel<T>();
+            Data = new T();
         }
-        public ResponseDataModel<T> Response { get; set; }
+
+        public T Data { get; set; }
     }
 
     public class ResponseModel
@@ -15,7 +18,7 @@
         public string Message { get; set; }
     }
 
-    public class ResponseDataModel<T> : ResponseModel
+    public class ResponseDataModel<T>
     {
         public T Data { get; set; }
     }

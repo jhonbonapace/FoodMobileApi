@@ -11,7 +11,7 @@ namespace Application.Interface
         ResponseModel<UserDTO> Get(int Id);
         ResponseModel<UserDTO> Get(string Email);
         ResponseModel<UserDTO> Get(string Username, string Password);
-        ResponseModel<IEnumerable<UserDTO>> List();
+        ResponseModel<List<UserDTO>> List();
         ResponseModel<UserDTO> Add(UserDTO user);
         ResponseModel Update(UserDTO user);
         ResponseModel Delete(int Id);

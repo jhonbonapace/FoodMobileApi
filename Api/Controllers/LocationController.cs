@@ -35,7 +35,7 @@ namespace Api.Controllers
             _ILocationService = new LocationService(_context, _mapboxSettings);
         }
 
-        [HttpGet("Location/Search")]
+        [HttpGet("Search")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> LocationSearch([FromQuery] string location)
         {
@@ -59,7 +59,7 @@ namespace Api.Controllers
         {
             try
             {
-                ResponseModel<IEnumerable<Country>> countries;
+                ResponseModel<List<Country>> countries;
 
                 if (_memoryCache.TryGetValue("countries", out countries))
                 {
@@ -91,7 +91,7 @@ namespace Api.Controllers
                 //Brazil
                 var IdCountry = 1;
 
-                ResponseModel<IEnumerable<State>> states;
+                ResponseModel<List<State>> states;
 
                 if (_memoryCache.TryGetValue("states", out states))
                 {

@@ -46,7 +46,7 @@ namespace Api.Controllers
 
                 var response = _userService.Add(user);
 
-                if (!response.Response.Success)
+                if (!response.Success)
                     return BadRequest(response);
                 else
                 {

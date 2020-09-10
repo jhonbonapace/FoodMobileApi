@@ -46,25 +46,25 @@ namespace Application.Services
                 else
                     response = userService.Get(auth.Email);
 
-                if (response.Response.Success)
+                if (response.Success)
                 {
-                    User user = _mapper.Map<User>(response.Response.Data);
+                    User user = _mapper.Map<User>(response.Data);
 
                     var token = GenerateAuthToken(user);
-                    model.Response.Data = new AuthenticateResponse(user, token);
+                    model.Data = new AuthenticateResponse(user, token);
 
-                    model.Response.Success = true;
+                    model.Success = true;
                 }
                 else
                 {
-                    model.Response.Message = "Usuário ou senha incorretos.";
-                    model.Response.Success = false;
+                    model.Message = "Usuário ou senha incorretos.";
+                    model.Success = false;
                 }
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Response.Success = false;
+                model.Success = false;
             }
 
             return model;

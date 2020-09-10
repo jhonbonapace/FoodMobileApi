@@ -9,8 +9,8 @@ namespace Application.Interface
     public interface ILocationService
     {
         Task<ResponseModel<MapboxPlacesDTO>> SearchLocation(string location);
-        ResponseModel<IEnumerable<Country>> GetCountries();
-        ResponseModel<IEnumerable<State>> GetStates(int IdCountry);
-        ResponseModel<IEnumerable<City>> GetCities(int IdState);
+        ResponseModel<List<Country>> GetCountries();
+        ResponseModel<List<State>> GetStates(int IdCountry);
+        ResponseModel<List<City>> GetCities(int IdState);
     }
 }

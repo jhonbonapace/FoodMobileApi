@@ -5,8 +5,8 @@ namespace Infra.Repository.Interface
 {
     public interface ILocationRepository
     {
-        IEnumerable<Country> GetCountries();
-        IEnumerable<State> GetStates(int IdCountry);
-        IEnumerable<City> GetCities(int IdState);
+        List<Country> GetCountries();
+        List<State> GetStates(int IdCountry);
+        List<City> GetCities(int IdState);
     }
 }

@@ -25,23 +25,23 @@ namespace Application.Services
             _repository = new FavoriteRepository(context);
         }
 
-        public ResponseModel<IEnumerable<UserFavoriteCustomerDTO>> List(int IdUser)
+        public ResponseModel<List<UserFavoriteCustomerDTO>> List(int IdUser)
         {
-            ResponseModel<IEnumerable<UserFavoriteCustomerDTO>> model = new ResponseModel<IEnumerable<UserFavoriteCustomerDTO>>();
+            ResponseModel<List<UserFavoriteCustomerDTO>> model = new ResponseModel<List<UserFavoriteCustomerDTO>>();
 
             try
             {
-                IEnumerable<UserFavoriteCustomer> itens = _repository.List(IdUser);
+                List<UserFavoriteCustomer> itens = _repository.List(IdUser);
 
-                model.Response.Data = _mapper.Map<IEnumerable<UserFavoriteCustomerDTO>>(itens);
+                model.Data = _mapper.Map<List<UserFavoriteCustomerDTO>>(itens);
 
-                model.Response.Success = true;
+                model.Success = true;
 
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Response.Success = false;
+                model.Success = false;
             }
 
             return model;
@@ -55,15 +55,15 @@ namespace Application.Services
             {
                 var item = _mapper.Map<UserFavoriteCustomer>(favoriteItem);
 
-                model.Response.Data = _repository.Add(item);
+                model.Data = _repository.Add(item);
 
-                model.Response.Success = true;
+                model.Success = true;
 
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Response.Success = false;
+                model.Success = false;
             }
 
             return model;
@@ -74,15 +74,15 @@ namespace Application.Services
 
             try
             {
-                model.Response.Data = _repository.Delete(Id);
+                model.Data = _repository.Delete(Id);
 
-                model.Response.Success = true;
+                model.Success = true;
 
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                model.Response.Success = false;
+                model.Success = false;
             }
 
             return model;
