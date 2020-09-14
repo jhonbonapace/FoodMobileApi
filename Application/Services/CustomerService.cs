@@ -1,8 +1,9 @@
-
 using Application.DTO;
 using Domain.Entities;
 using Domain.Models;
 using Infra.Repository.Interface;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
 
 namespace Application.Services
 {
@@ -27,15 +28,22 @@ namespace Application.Services
             //     }
             // }
 
+            //4326 refere-se a WGS 84, um padrão usado em GPS e outros sistemas geográficos.
+            var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+            var currentLocation = geometryFactory.CreatePoint(new Coordinate(customer.Address.Longitude, customer.Address.Latitude));
+            customer.Address.Location = currentLocation;
+
             _customerRepository.Add(customer);
         }
 
         public CustomerList List(CustomerListFilterDto customerListFilterDto)
         {
+            var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+            var currentLocation = geometryFactory.CreatePoint(new Coordinate(customerListFilterDto.Longitude, customerListFilterDto.Latitude));
+
             return _customerRepository.List(new CustomerFilter
             {
-                Latitude = customerListFilterDto.Latitude,
-                Longitude = customerListFilterDto.Longitude,
+                Location = currentLocation,
                 PageSize = customerListFilterDto.PageSize,
                 CurrentPage = customerListFilterDto.CurrentPage,
                 Tags = customerListFilterDto.Tags

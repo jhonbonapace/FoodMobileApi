@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using NetTopologySuite.Geometries;
 
 namespace Domain.Entities
 {
@@ -18,8 +19,9 @@ namespace Domain.Entities
 
         [Column(TypeName = "varchar(8)")]
         public string ZipCode { get; set; }
-        public double? Latitude { get; set; }
-        public double? Longitude { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public Geometry Location { get; set; }
         public int CityId { get; set; }
         public City City { get; set; }
     }

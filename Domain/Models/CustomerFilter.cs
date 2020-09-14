@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NetTopologySuite.Geometries;
 
 namespace Domain.Models
 {
@@ -11,7 +12,7 @@ namespace Domain.Models
 
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-        public long Distance { get; set; }
+        public Geometry Location { get; set; }
         public double Rating { get; set; }
         public IEnumerable<string> Tags { get; set; }
         public string Type { get; set; } // Um especificador mais geral do que mais representa o estabelecimento

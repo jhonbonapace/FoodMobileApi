@@ -17,10 +17,11 @@ namespace Infra.Repository.Implementation
 
         public CustomerList List(CustomerFilter customerFilter)
         {
-            var query = _context.Customer.OrderByDescending(x => x.Name);
+            //var query = _context.Customer.OrderByDescending(x => x.Name);
 
             var (pageCount, results) =
                             _context.Customer
+                                .OrderBy(c => c.Address.Location.Distance(customerFilter.Location))
                                 .OrderByDescending(x => x.Name)
                                 .GetPaged(customerFilter.CurrentPage, customerFilter.PageSize);
 

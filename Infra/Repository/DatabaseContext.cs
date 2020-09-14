@@ -1,12 +1,12 @@
-﻿using Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using Domain.Entities;
 using Domain.Helpers;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace Infra.Repository
 {
@@ -14,7 +14,6 @@ namespace Infra.Repository
     public class DatabaseContext : DbContext
     {
         private readonly DatabaseSettings _databaseSettings;
-
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options, IOptions<DatabaseSettings> databaseSettings) : base(options)
         {
@@ -28,6 +27,7 @@ namespace Infra.Repository
                 builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
                 builder.MigrationsAssembly("Api");
                 builder.CommandTimeout(240);
+                builder.UseNetTopologySuite();
             });
 
             base.OnConfiguring(optionsBuilder);
@@ -60,7 +60,7 @@ namespace Infra.Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             #region CountrySeed
-            using (StreamReader r = new StreamReader("../Infra/Repository/DatabaseSeed/countries.json"))
+            using(StreamReader r = new StreamReader("../Infra/Repository/DatabaseSeed/countries.json"))
             {
                 string json = r.ReadToEnd();
                 IEnumerable<Country> countries = JsonConvert.DeserializeObject<IEnumerable<Country>>(json);
@@ -69,7 +69,7 @@ namespace Infra.Repository
             }
             #endregion
             #region StateSeed
-            using (StreamReader r = new StreamReader("../Infra/Repository/DatabaseSeed/states.json"))
+            using(StreamReader r = new StreamReader("../Infra/Repository/DatabaseSeed/states.json"))
             {
                 string json = r.ReadToEnd();
                 IEnumerable<State> states = JsonConvert.DeserializeObject<IEnumerable<State>>(json);
@@ -79,7 +79,7 @@ namespace Infra.Repository
 
             #endregion
             #region CitySeed
-            using (StreamReader r = new StreamReader("../Infra/Repository/DatabaseSeed/cities.json"))
+            using(StreamReader r = new StreamReader("../Infra/Repository/DatabaseSeed/cities.json"))
             {
                 string json = r.ReadToEnd();
                 IEnumerable<City> cities = JsonConvert.DeserializeObject<IEnumerable<City>>(json);
@@ -89,7 +89,7 @@ namespace Infra.Repository
             #endregion
             #region PaymentMethodsSeed
 
-            using (StreamReader r = new StreamReader("../Infra/Repository/DatabaseSeed/paymentMethods.json"))
+            using(StreamReader r = new StreamReader("../Infra/Repository/DatabaseSeed/paymentMethods.json"))
             {
                 string json = r.ReadToEnd();
                 IEnumerable<PaymentMethod> Paymentmethod = JsonConvert.DeserializeObject<IEnumerable<PaymentMethod>>(json);

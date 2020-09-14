@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgis/postgis:latest
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+    ports:
+      - "5001:5432"
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5002:80"
+# VERIFICAR PARA CRIAR DOCKERFILE, GERAR UM ARQUIVO COM O CONTEUDO CREATE EXTENSION postgis; E COPIAR O ARQUIVO PARA A PASTA DENTRO DO CONTAINER
