@@ -10,6 +10,7 @@ namespace Domain.Models
         public int PageSize { get; set; }
         public int RowCount { get; set; }
 
+        public double Distance { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public Geometry Location { get; set; }

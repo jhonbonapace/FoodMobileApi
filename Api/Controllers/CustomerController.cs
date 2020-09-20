@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Application.Attributes;
 using Application.DTO;
 using Application.Services;
@@ -6,8 +8,6 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 
 namespace Api.Controllers
 {
@@ -49,7 +49,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         [Route("List")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

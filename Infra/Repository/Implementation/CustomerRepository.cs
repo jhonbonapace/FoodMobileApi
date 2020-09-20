@@ -1,8 +1,8 @@
+using System;
+using System.Linq;
 using Domain.Entities;
 using Domain.Models;
 using Infra.Repository.Interface;
-using System;
-using System.Linq;
 
 namespace Infra.Repository.Implementation
 {
@@ -19,11 +19,11 @@ namespace Infra.Repository.Implementation
         {
             //var query = _context.Customer.OrderByDescending(x => x.Name);
 
-            var (pageCount, results) =
-                            _context.Customer
-                                .OrderBy(c => c.Address.Location.Distance(customerFilter.Location))
-                                .OrderByDescending(x => x.Name)
-                                .GetPaged(customerFilter.CurrentPage, customerFilter.PageSize);
+            // var (pageCount, results) =
+            //                 _context.Customer
+            //                     .OrderBy(c => c.Address.Location.Distance(customerFilter.Location))
+            //                     .OrderByDescending(x => x.Name)
+            //                     .GetPaged(customerFilter.CurrentPage, customerFilter.PageSize);
 
             //var customerList = new CustomerList
             //{
@@ -31,7 +31,13 @@ namespace Infra.Repository.Implementation
             //    PageCount = pageCount
             //};
 
-            var result = _context.Customer.OrderByDescending(x => x.Name).ToList();
+            //var result = _context.Customer.OrderBy(c => c.Address.Location.Distance(customerFilter.Location)).OrderBy(x => x.Name).ToList();
+            var result = _context.Customer
+                .Where(c => c.Address.Location.Distance(customerFilter.Location) < customerFilter.Distance)
+                .OrderBy(c => c.Address.Location.Distance(customerFilter.Location))
+                .OrderBy(x => x.Name)
+                .Select(x => new Customer { Distance = x.Address.Location.Distance(customerFilter.Location), Name = x.Name })
+                .ToList();
 
             var customerList = new CustomerList
             {
@@ -56,7 +62,6 @@ namespace Infra.Repository.Implementation
                 return false;
             }
         }
-
 
     }
 }

@@ -44,9 +44,10 @@ namespace Application.Services
             return _customerRepository.List(new CustomerFilter
             {
                 Location = currentLocation,
-                PageSize = customerListFilterDto.PageSize,
-                CurrentPage = customerListFilterDto.CurrentPage,
-                Tags = customerListFilterDto.Tags
+                    PageSize = customerListFilterDto.PageSize,
+                    CurrentPage = customerListFilterDto.CurrentPage,
+                    Tags = customerListFilterDto.Tags,
+                    Distance = customerListFilterDto.Distance
             });
         }
 

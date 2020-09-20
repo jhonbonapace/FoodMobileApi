@@ -33,5 +33,8 @@ namespace Domain.Entities
         public ICollection<CustomerWorkDay> CustomerWorkDays { get; set; }
         public ICollection<UserCommentaries> UserCommentaries { get; set; }
         public ICollection<UserFavoriteCustomer> UserFavoriteCustomers { get; set; }
+
+        [NotMapped]
+        public double Distance { get; set; }
     }
 }
